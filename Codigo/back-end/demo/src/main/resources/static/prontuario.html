@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/prontuario.css">
+    <title>Prontuário Médico</title>
+    
+</head>
+<body>
+    <header>
+    
+        <img src="./assets/img/logo psicologo.jpg" alt="Logo" class="logo">
+    </header>
+    
+    <body>
+    
+
+    <main>
+        
+
+        
+
+        <div class="background-perfil">
+            <div class="patient-header">
+                <div class="patient-type" id="patientTypeDisplay">Home Sobrehome (Paciente)</div>
+                <div class="patient-phone">Telefone (xx) xxxxx-xxxx</div>
+            </div>
+            
+            <h1>Identificação</h1>
+            
+            <table>
+                <tr>
+                    <th>Idade</th>
+                    <td><input type="text" id="idade" placeholder="XX"></td>
+                    <th>Nascimento</th>
+                    <td><input type="text" id="nascimento" placeholder="dd/mm/yyyy"></td>
+                    <th>Estado Civil</th>
+                    <td><input type="text" id="estadoCivil" placeholder="(xx) xxxxx-xxxx"></td>
+                </tr>
+                <tr>
+                    <th>Profissão</th>
+                    <td><input type="text" id="profissao" placeholder="lorem"></td>
+                    <th>Religião</th>
+                    <td><input type="text" id="religiao" placeholder="lorem"></td>
+                </tr>
+                <tr>
+                    <th>Filho</th>
+                    <td><input type="text" id="filho" placeholder="lorem"></td>
+                    <th>Reside com</th>
+                    <td><input type="text" id="resideCom" placeholder="lorem"></td>
+                </tr>
+                <tr>
+                    <th>Tabagismo</th>
+                    <td><input type="text" id="tabagismo" placeholder="lorem"></td>
+                    <th>Bebe ou utiliza alguma substância</th>
+                    <td><input type="text" id="substancia" placeholder="lorem"></td>
+                </tr>
+            </table>
+            
+            <h2>Histórico</h2>
+            
+            <table>
+                <tr>
+                    <th>Queixa principal</th>
+                    <td colspan="5"><input type="text" id="queixaPrincipal" placeholder="lorem"></td>
+                </tr>
+                <tr>
+                    <th>Histórico familiar</th>
+                    <td colspan="5"><input type="text" id="historicoFamiliar" placeholder="lorem"></td>
+                </tr>
+            </table>
+            
+            <div class="notes-section">
+                <h2>Notas</h2>
+                <textarea id="notas" placeholder="Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum."></textarea>
+            </div>
+            
+            <div class="buttons">
+                <button class="btn-cancelar">Cancelar</button>
+                <button class="btn-excluir">Excluir Prontuário</button>
+                <button class="btn-salvar">Salvar Prontuário</button>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/prontuario.js"></script>
+</body>
+</html>

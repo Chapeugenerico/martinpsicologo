@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Martin Psicólogo | Perfil do Paciente</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/homepage.css">
+    <link rel="stylesheet" href="css/perfilPaciente.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="homePage.html" aria-label="Página inicial"><img src="./assets/img/logo psicologo.jpg" alt="Logo" class="logo"></a>
+        </div>
+        <div class="nav-links" id="navLinks">
+            <a href="homePage.html" class="active" aria-current="page">Início</a>
+            <a href="perfilPaciente.html" class="active" aria-current="page">Perfil</a>
+            <a href="pacienteGerenciaHorarios.html">Agenda</a>
+            <a href="agendarHorario.html">Agendar Horário</a>
+            <button id="logoutBtn" class="logout-btn" type="button" aria-label="Sair">Logout</button>
+        </div>
+        <div id="userInfo" class="user-info" aria-live="polite"></div>
+    </nav>
+
+    <main style="margin-top: 5%;">
+        <div class="tabs">
+            <button class="tab active" id="perfilTab">Perfil</button>
+            <button class="tab" id="horariosTab"> <a href="pacienteGerenciaHorarios.html" class="nav-link-on">Agenda</a> </button>
+        </div>
+
+        <!-- Seção Perfil -->
+        <section class="card" id="perfilSection">
+            <h2 id="nome"></h2>
+
+            <div class="info-row">
+                <div class="info-label">Telefone</div>
+                <div class="info-value"><span id="telefone"></span></div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">E-mail</div>
+                <div class="info-value"><span id="email"></span></div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">CPF</div>
+                <div class="info-value"><span id="cpf"></span></div>
+            </div>
+
+            <div class="info-row">
+                <div class="info-label">CEP</div>
+                <div class="info-value"><span id="endereco"></span></div>
+            </div>
+
+            <div class="action-buttons">
+                <button class="delete-btn" id="deleteBtn">Excluir Conta</button>
+                <button class="edit-btn" id="editBtn">Editar ✎</button>
+            </div>
+        </section>
+
+        <!-- Modal de Confirmação para Excluir Conta -->
+        <div id="deleteModal" class="modal" style="display: none;">
+            <div class="modal-content">
+                <h3>Confirmar Exclusão da Conta</h3>
+                <p><strong>Atenção:</strong> Esta ação não pode ser desfeita. Todos os seus dados serão permanentemente excluídos.</p>
+                <p>Tem certeza absoluta que deseja excluir sua conta?</p>
+                <div class="modal-buttons">
+                    <button id="confirmDelete" class="danger-btn">Sim, Excluir Minha Conta</button>
+                    <button id="cancelDelete" class="cancel-btn">Cancelar</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Formulário de Edição -->
+        <section class="card edit-form" id="editForm" style="display: none;">
+            <h2>Editar Perfil</h2>
+            <form id="profileForm">
+                <div class="form-group">
+                    <label for="editNome">Nome:</label>
+                    <input type="text" id="editNome" name="nome" required>
+                </div>
+                <div class="form-group">
+                    <label for="editEmail">Email:</label>
+                    <input type="email" id="editEmail" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="editTelefone">Telefone:</label>
+                    <input type="tel" id="editTelefone" name="telefone">
+                </div>
+                <div class="form-group">
+                    <label for="editCpf">CPF:</label>
+                    <input type="text" id="editCpf" name="cpf">
+                </div>
+                <div class="form-group">
+                    <label for="editEndereco">Endereço:</label>
+                    <textarea id="editEndereco" name="endereco" rows="3"></textarea>
+                </div>
+                <div class="form-buttons">
+                    <button type="button" class="cancel-btn" id="cancelEdit">Cancelar</button>
+                    <button type="submit" class="save-btn">Salvar</button>
+                </div>
+            </form>
+        </section>
+
+        
+    </main>
+
+    <script src="js/auth.js"></script>
+    <script src="js/perfilPaciente.js"></script>
+</body>
+</html>

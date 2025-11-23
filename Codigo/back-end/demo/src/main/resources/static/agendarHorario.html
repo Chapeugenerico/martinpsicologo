@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/agendarHorario.css">
+    <link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <title>Agende seu horário</title>
+</head>
+
+<body>
+
+    <nav class="navbar">
+        <div class="logo-container">
+        <a href="homePage.html" aria-label="Página inicial"><img src="./assets/img/logo psicologo.jpg" alt="Logo" class="logo"></a> </div>
+        <div class="nav-links" id="navLinks"> </div>
+        <div id="userInfo" class="user-info" aria-live="polite"> </div> 
+    </nav>
+
+    <header>
+        <p class="subtitle">Escolha o dia e horario que melhor te atende!</p>
+    </header>
+    
+    <div class="container">
+        
+        
+        <div class="calendar-container">
+            <div class="month-navigation">
+                <button class="nav-btn" id="prevMonth">◀ Mês Anterior</button>
+                <div class="month-year" id="currentMonthYear">Carregando...</div>
+                <button class="nav-btn" id="nextMonth">Próximo Mês ▶</button>
+            </div>
+            
+            
+            <div class="week-days">
+                <div class="day-header">Dom</div>
+                <div class="day-header">Seg</div>
+                <div class="day-header">Ter</div>
+                <div class="day-header">Qua</div>
+                <div class="day-header">Qui</div>
+                <div class="day-header">Sex</div>
+                <div class="day-header">Sáb</div>
+            </div>
+            
+            <div class="calendar-grid" id="calendarGrid">
+                <div class="loading">Carregando calendário...</div>
+            </div>
+            
+            <div class="time-slots-container" id="timeSlotsContainer">
+                <div class="selected-date" id="selectedDate"></div>
+                
+                <div class="time-slots-grid" id="timeSlotsGrid">
+                    <!-- Horários serão gerados dinamicamente -->
+                </div>
+                
+                <div class="appointment-form" id="appointmentForm">
+    <h3>Agendar Consulta</h3>
+    <form id="bookingForm">
+        <div class="form-group">
+            <label for="patientName">Nome completo do paciente *</label>
+            <input type="text" id="patientName" name="patientName" required>
+        </div>
+        <div class="form-group">
+            <label for="appointmentNotes">Observações</label>
+            <textarea id="appointmentNotes" name="appointmentNotes" rows="3"></textarea>
+        </div>
+        <div style="display: flex; gap: 10px;">
+            <button type="button" class="btn btn-secondary" id="cancelBooking">Cancelar</button>
+            <button type="submit" class="btn">Confirmar Agendamento</button>
+        </div>
+    </form>
+</div>
+            </div>
+            
+            <div class="footer" style="display: none;">
+                <button class="btn" id="btnAgendar" disabled>Selecionar Data e Horário</button>
+            </div>
+        </div>
+        
+    </div>
+
+    <script src="./js/auth.js"></script>
+    <script src="./js/homePage.js"></script> 
+    
+    <script src="./js/agendarHorario.js"></script>
+</body>
+</html>

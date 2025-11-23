@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title> Martin Psicólogo | Gerenciar Pacientes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/perfilPsicologo.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <img src="./assets/img/logo psicologo.jpg" alt="Logo" class="logo">
+        <button class="btn-aba-home" onclick="redirecionarPara('homePage.html')">
+            <h4>Início</h4>
+        </button>
+        <img src="./assets/img/logout.png" alt="logout" class="logout">
+    </header>
+
+    <main>
+        <div class="abas">
+            <button class="btn-aba-1" onclick="redirecionarPara('perfilPsicologo.html')">
+                <h4>Perfil</h4>
+            </button>
+            <button class="btn-aba" onclick="redirecionarPara('gerenciarPaciente.html')">
+                <h4>Pacientes</h4>
+            </button>
+            <button class="btn-aba" onclick="redirecionarPara('gerenciaHorario.html')">
+                <h4>Horários</h4>
+            </button>
+            <button class="btn-aba" onclick="redirecionarPara('relatorio.html')">
+                <h4>Relatório</h4>
+            </button>
+        </div>
+
+        <div class="background-perfil">
+            <div class="box">
+                <h2></h2>
+
+                <div class="bloco">
+                    <div class="nomeDoBloco">
+                        <h4>Nome</h4>
+                    </div>
+                    <div class="campoDeTexto">
+                        <input type="text" name="nome" placeholder="Marcos Martin">
+                    </div>
+                    <div class="edit">
+                        <p>✎</p>
+                    </div>
+                </div>
+
+                <div class="bloco">
+                    <div class="nomeDoBloco">
+                        <h4>Telefone</h4>
+                    </div>
+                    <div class="campoDeTexto">
+                        <input type="tel" id="telefone" name="telefone" placeholder="(XX) XXXXX-XXXX">
+                    </div>
+                    <div class="edit">
+                        <p>✎</p>
+                    </div>
+                </div>
+
+                <div class="bloco">
+                    <div class="nomeDoBloco">
+                        <h4>E-mail</h4>
+                    </div>
+                    <div class="campoDeTexto">
+                        <input type="email" name="email" placeholder="email@dom.com">
+                    </div>
+                    <div class="edit">
+                        <p>✎</p>
+                    </div>
+                </div>
+
+                <div class="bloco">
+                    <div class="nomeDoBloco">
+                        <h4>Instagram</h4>
+                    </div>
+                    <div class="campoDeTexto">
+                        <input type="text" name="insta" placeholder="@Martin">
+                    </div>
+                    <div class="edit">
+                        <p>✎</p>
+                    </div>
+                </div>
+
+                <div class="buttons">
+                    <button class="btn-cancelar" id="btnCancelar" value="verificar">
+                        <h4>Cancelar</h4>
+                    </button>
+                    <button class="btn-salvar" id="btnSalvar" value="verificar">
+                        <h4>Salvar</h4>
+                    </button>
+                </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+    </main>
+</body>
+
+
+<script src="js/perfilPsicologo.js"></script>
+
+</html>

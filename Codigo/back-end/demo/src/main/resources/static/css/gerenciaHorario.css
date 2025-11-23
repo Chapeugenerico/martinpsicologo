@@ -1,0 +1,828 @@
+header {
+    position: relative;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #73022C;
+}
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid #e1e5e9;
+    background: #591636;
+    color: white;
+    border-radius: 10px 10px 0 0;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: white;
+}
+
+img.logo {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+
+    /* Tornar igual ao gerenciarPaciente: posicionamento absoluto no canto superior esquerdo */
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+    z-index: 1;
+}
+
+img.logout {
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    margin: 30px 10px;
+
+    /* posicionamento igual ao gerenciarPaciente: canto superior direito */
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    cursor: pointer;
+    z-index: 1;
+}
+
+/* Adicionar estilo do botão Home no cabeçalho */
+button.btn-aba-home {
+    background-color: #591636;
+    transition: background-color 0.3s ease;
+    border-radius: 10px; /* Arredondado em todos os cantos */
+    width: 100px;
+    height: 40px;
+    padding: 0 10px;
+    
+    font-size: large;
+    color: #FFFFFF;
+    
+    cursor: pointer;
+    border: none;
+    
+    /* Posição no header, próximo ao logout */
+    position: absolute;
+    top: 2em;
+    z-index: 1;
+}
+
+button.btn-aba-home:hover {
+    background-color: #FFFFFF;
+    color: #73022C;
+
+}
+
+button.btn-aba-home h4 {
+    margin: 0;
+    position: relative;
+    top: 0;
+}
+
+/* Ajustes de Media Query */
+@media (max-width: 768px) {
+    button.btn-aba-home {
+        width: 80px;
+        height: 35px;
+        font-size: 12px;
+        right: 70px; /* Ajuste para o botão home */
+        top: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    button.btn-aba-home {
+        width: 70px;
+        height: 30px;
+        font-size: 10px;
+        right: 60px; /* Ajuste para o botão home */
+        top: 20px;
+    }
+}
+
+/* Abas estilo igual gerenciarPaciente */
+.abas {
+    display: block;
+    justify-content: center;
+    text-align: center;
+    align-items: flex-end;
+    margin-left: auto;
+    margin-right: auto;
+    width: 650px;
+
+    z-index: 3;
+}
+
+main {
+    padding: 40px;
+    margin-top: 60px;
+}
+
+/* abas: definida abaixo com comportamento nowrap e overflow */
+
+button.btn-aba,
+button.btn-aba-1 {
+    background-color: #591636;
+    transition: background-color 0.3s ease;
+
+    border-radius: 10px 10px 0 0;
+    width: 150px;
+    height: 50px;
+
+    position: relative;
+    top: 2px;
+    
+    font-size: large;
+    color: #FFFFFF;
+
+    cursor: pointer;
+
+    z-index: 2;
+}
+button.btn-aba h4,
+button.btn-aba-1 h4 {
+    position: relative;
+    /* corrigir valor inválido top: -2x para alinhamento interno */
+    top: 0;
+    margin: 0;
+}
+
+button.btn-aba-1 {
+    background-color: #FFFFFF;
+    color: #591636;
+}
+
+main.abas button:hover {
+    background-color: #591636;
+}
+
+.background-perfil {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.box {
+    background-color: #d8d7e0;
+    border-radius: 50px;
+    margin: 5%;
+    padding: 2%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 100%;
+    margin: 0 auto;
+    position: relative; 
+    overflow: hidden;
+}
+
+.box h2 {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+
+    color: #591636;
+    font-size: 300%;
+    text-shadow: #444343 0px 1.5px 2px;
+}
+
+.bloco {
+    background-color: #EDEDED;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    width: 450px;
+    height: 70px;
+
+    padding: 0px 0px;
+    margin: 10px 300px;
+
+    border-radius: 15px;
+
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.nomeDoBloco {
+    background-color: #591636;
+    color: #FFFFFF;
+
+    width: 120px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 15px 0 0 15px;
+}
+
+.campoDeTexto input {
+    background-color: #FFFFFF;
+    color: #000000;
+
+    width: 320px;
+    height: 65px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    margin: 0;
+    border: none;
+    font-weight: bold;
+
+}
+
+.edit {
+    background-color: #591636;
+    color: #FFFFFF;
+
+    font-size: 30px;
+
+    width: 50px;
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    cursor: pointer;
+
+    border-radius: 0 15px 15px 0;
+}
+
+.edit:hover {
+    background-color: #73022C;
+}
+
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 25px;
+}
+
+.box button {
+    display: flex;
+    margin: 20px;
+    margin-bottom: -10px;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 180px;
+    padding: 0px 60px;
+    border-radius: 30px;
+
+    cursor: pointer;
+
+    transition: background-color 0.3s ease;
+
+    font-size: 150%;
+}
+
+.box .btn-cancelar {
+    background-color: transparent;
+    color: #591636;
+}
+
+.box .btn-salvar {
+    background-color: #591636;
+    color: #FFFFFF;
+}
+
+/* ===== SEÇÕES DE HORÁRIOS ===== */
+
+/* Seção para adicionar/remover horários */
+.secao-horario {
+    background: #F2CED8;
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.secao-horario h3 {
+    color: #591636;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0 0 15px 0;
+    text-align: center;
+}
+
+.form-horario {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.campo-horario {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.campo-horario label {
+    color: #591636;
+    font-weight: bold;
+    font-size: 14px;
+}
+
+.horarios-linha {
+    display: flex;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+.campo-horario select,
+.campo-horario input[type="time"] {
+    padding: 10px;
+    border: 2px solid #591636;
+    border-radius: 8px;
+    font-size: 14px;
+    background: white;
+    color: #333;
+    min-width: 120px;
+}
+
+.campo-horario select:focus,
+.campo-horario input[type="time"]:focus {
+    outline: none;
+    border-color: #73022C;
+    box-shadow: 0 0 5px rgba(89, 22, 54, 0.3);
+}
+
+.btn-adicionar,
+.btn-remover {
+    background: #591636;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    align-self: center;
+    width: 12em;
+    height: 4em;
+}
+
+.btn-adicionar:hover,
+.btn-remover:hover {
+    background: #73022C;
+}
+
+/* Campo de remoção */
+.campo-remover {
+    display: flex;
+    gap: 15px;
+    align-items: flex-end;
+}
+
+.campo-remover .campo-horario {
+    flex: 1;
+}
+
+/* ===== SEÇÃO DA AGENDA ===== */
+
+/* Container principal da agenda */
+.secao-agenda {
+    background: rgba(255, 255, 255, 0.95);
+    border-radius: 15px;
+    padding: 20px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+
+.agenda-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.agenda-header h3 {
+    color: #591636;
+    font-size: 18px;
+    font-weight: bold;
+    margin: 0;
+}
+
+.calendar-controls {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+/* Botões de controle da agenda */
+.btn-google-auth,
+.btn-sync {
+    background: #4285f4;
+    color: white;
+    border: none;
+    border-radius: 6px;
+    padding: 8px 16px;
+    font-size: 14px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    white-space: nowrap;
+}
+
+.btn-google-auth:hover,
+.btn-sync:hover {
+    background: #3367d6;
+}
+
+.btn-sync {
+    background: #34a853;
+}
+
+.btn-sync:hover {
+    background: #2d9048;
+}
+
+
+
+/* ===== CALENDÁRIO VISUAL ===== */
+
+.calendario-container {
+    width: 100%;
+    overflow-x: auto;
+}
+
+.calendario-semanal {
+    min-width: 600px;
+}
+
+.dias-semana {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    margin-bottom: 10px;
+}
+
+.dia-header {
+    background: #f0f0f0;
+    padding: 10px;
+    text-align: center;
+    font-weight: bold;
+    border-radius: 8px 8px 0 0;
+    border: 2px solid #ddd;
+}
+
+.dia-header.atual {
+    background: #591636;
+    color: white;
+}
+
+.agenda-horarios {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 2px;
+    min-height: 300px;
+}
+
+.coluna-dia {
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+    padding: 5px;
+    background: #f9f9f9;
+    border: 2px solid #ddd;
+    border-radius: 0 0 8px 8px;
+    min-height: 280px;
+}
+
+.evento {
+    padding: 8px;
+    border-radius: 6px;
+    font-size: 12px;
+    text-align: center;
+    line-height: 1.2;
+    min-height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.evento:hover {
+    transform: scale(1.02);
+}
+
+.evento.disponivel {
+    background: #4CAF50;
+    color: white;
+}
+
+.evento.agendado {
+    background: #2196F3;
+    color: white;
+}
+
+.evento.bloqueado {
+    background: #9C27B0;
+    color: white;
+}
+
+.evento.amarelo {
+    background: #FFC107;
+    color: #333;
+}
+
+/* ===== GOOGLE CALENDAR INTEGRATION ===== */
+
+/* Controles do Google Calendar */
+.google-calendar-controls {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-left: 15px;
+}
+
+/* Botões de autenticação do Google */
+.google-btn {
+    padding: 8px 16px;
+    border: none;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    font-weight: bold;
+    transition: background-color 0.3s;
+}
+
+.connect-btn {
+    background-color: #4285f4;
+    color: white;
+}
+
+.connect-btn:hover {
+    background-color: #3367d6;
+}
+
+.disconnect-btn {
+    background-color: #dc3545;
+    color: white;
+}
+
+.disconnect-btn:hover {
+    background-color: #c82333;
+}
+
+/* Status do Google Calendar */
+.calendar-status {
+    padding: 8px 12px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    font-size: 14px;
+    font-weight: bold;
+    text-align: center;
+    display: none;
+}
+
+.calendar-status.connected {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    display: block;
+}
+
+.calendar-status.disconnected {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    display: block;
+}
+
+.calendar-status.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+    display: block;
+}
+
+.calendar-status.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+    display: block;
+}
+
+.calendar-status.info {
+    background-color: #d1ecf1;
+    color: #0c5460;
+    border: 1px solid #bee5eb;
+    display: block;
+}
+
+/* Mensagens do Google Calendar */
+.calendar-message {
+    position: absolute;
+    top: 100%;
+    right: 0;
+    margin-top: 10px;
+    padding: 8px 12px;
+    border-radius: 4px;
+    font-size: 0.9em;
+    font-weight: bold;
+    z-index: 1000;
+    animation: slideDown 0.3s ease-out;
+}
+
+.calendar-message.success {
+    background-color: #d4edda;
+    color: #155724;
+    border: 1px solid #c3e6cb;
+}
+
+.calendar-message.error {
+    background-color: #f8d7da;
+    color: #721c24;
+    border: 1px solid #f5c6cb;
+}
+
+.calendar-message.warning {
+    background-color: #fff3cd;
+    color: #856404;
+    border: 1px solid #ffeaa7;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Eventos sincronizados do Google Calendar */
+.google-event {
+    border-left: 4px solid #4285f4;
+    background-color: #f8f9fa;
+}
+
+.google-event .status.google-sync {
+    background-color: #4285f4;
+    color: white;
+    font-size: 0.8em;
+    padding: 2px 6px;
+    border-radius: 10px;
+    display: inline-block;
+}
+
+/* ===== RESPONSIVIDADE ===== */
+
+/* Tablets e telas médias */
+@media (max-width: 768px) {
+    .abas {
+        flex-direction: row;
+        align-items: center;
+        flex-wrap: wrap;
+    }
+    
+    .horarios-linha {
+        flex-direction: row;
+        gap: 10px;
+        flex-wrap: nowrap;
+    }
+    
+    .calendario-container {
+        overflow-x: auto;
+    }
+    
+    .secao-horario,
+    .secao-agenda {
+        padding: 15px;
+        margin: 15px 0;
+    }
+    
+    .campo-horario select,
+    .campo-horario input[type="time"],
+    .campo-remover select {
+        min-width: 100px;
+        font-size: 14px;
+    }
+    
+    .evento {
+        font-size: 11px;
+        padding: 6px;
+        min-height: 35px;
+    }
+}
+
+/* Celulares em modo portrait */
+@media (max-width: 480px) {
+    .horarios-linha,
+    .campo-remover {
+        flex-direction: column;
+        gap: 10px;
+    }
+    
+    .campo-horario select,
+    .campo-horario input[type="time"],
+    .campo-remover select {
+        min-width: 100%;
+        width: 100%;
+    }
+
+    .google-calendar-controls {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 8px;
+        margin-left: 0;
+        margin-top: 10px;
+    }
+    
+    .calendar-message {
+        position: relative;
+        top: auto;
+        right: auto;
+        margin: 8px 0;
+    }
+    
+    .agenda-header {
+        flex-direction: column;
+        align-items: flex-start;
+    }
+    
+    .btn-adicionar,
+    .btn-remover {
+        width: 100%;
+    }
+}
+
+/* ===== MODAL PADRÃO ===== */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0,0,0,0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 2000;
+}
+.modal-content {
+    background: #ffffff;
+    border-radius: 10px;
+    width: 420px;
+    max-width: 95%;
+    box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+    overflow: hidden;
+}
+.modal-body {
+    padding: 16px;
+    color: #333;
+    font-size: 14px;
+}
+.modal-actions {
+    display: flex;
+    gap: 10px;
+    justify-content: flex-end;
+    padding: 16px;
+    background: #f7f7f7;
+}
+.modal-close {
+    background: transparent;
+    border: none;
+    color: white;
+    font-size: 20px;
+    line-height: 1;
+    cursor: pointer;
+}
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 12px 16px;
+    border-bottom: 1px solid #e1e5e9;
+    background: #591636;
+    color: white;
+}
+.modal-header h3 {
+    margin: 0;
+    font-size: 16px;
+}

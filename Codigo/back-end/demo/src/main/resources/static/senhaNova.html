@@ -1,0 +1,207 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/esqueceuSenha.css">
+    <link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
+    <title>Nova Senha</title>
+</head>
+<body>
+  <div class="cadastro">
+    <div class="esquerda">
+      <img src="./assets/img/logo psicologo.jpg" alt="Logo Psicólogo">
+    </div>
+
+    <div class="direita">
+      <a href="esqueceuSenha.html" class="btn-voltar">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 13L5 8L10 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Voltar
+      </a>
+
+      <br><br><br><br>
+
+      <form id="redefinirSenhaForm">
+        <input type="hidden" id="emailUsuario" name="email">
+        <input type="password" name="novaSenha" id="novaSenha" placeholder="Nova Senha" required>
+        <input type="password" name="confirmarSenha" id="confirmarSenha" placeholder="Confirmar Nova Senha" required>
+        
+        <div id="mensagem" style="display: none; margin: 10px 0; padding: 10px; border-radius: 5px;"></div>
+
+        <div class="botoes">
+          <br>
+          <button type="button" class="button" id="btnRedefinir">Redefinir Senha</button>
+        </div>
+      </form>
+    </div>
+  </div>
+  
+  <script>
+    console.log('=== PÁGINA SENHA NOVA CARREGADA ===');
+    console.log('URL atual:', window.location.href);
+    
+    // DEBUG: Mostra todo o localStorage
+    console.log('=== LOCALSTORAGE COMPLETO ===');
+    for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        console.log(key + ':', localStorage.getItem(key));
+    }
+    console.log('=== FIM LOCALSTORAGE ===');
+    
+    let emailParaRecuperacao = '';
+
+    // Tenta obter o email de várias fontes
+    function obterEmailRecuperacao() {
+        // 1. Tenta do emailRecuperacao
+        let email = localStorage.getItem('emailRecuperacao');
+        console.log('1. Email do emailRecuperacao:', email);
+        
+        if (email) return email;
+        
+        // 2. Tenta do usuarioLogado
+        const usuarioLogado = localStorage.getItem('usuarioLogado');
+        if (usuarioLogado) {
+            try {
+                const usuario = JSON.parse(usuarioLogado);
+                email = usuario.usuemail || usuario.email;
+                console.log('2. Email do usuarioLogado:', email);
+                if (email) return email;
+            } catch (e) {
+                console.error('Erro ao parsear usuarioLogado:', e);
+            }
+        }
+        
+        // 3. Tenta do pacienteLogado
+        const pacienteLogado = localStorage.getItem('pacienteLogado');
+        if (pacienteLogado) {
+            try {
+                const paciente = JSON.parse(pacienteLogado);
+                email = paciente.usuemail || paciente.email;
+                console.log('3. Email do pacienteLogado:', email);
+                if (email) return email;
+            } catch (e) {
+                console.error('Erro ao parsear pacienteLogado:', e);
+            }
+        }
+        
+        console.log('4. Nenhum email encontrado');
+        return null;
+    }
+
+    // Obtém o email ao carregar a página
+    emailParaRecuperacao = obterEmailRecuperacao();
+    console.log('Email para recuperação definido como:', emailParaRecuperacao);
+
+    // Preenche o campo hidden com o email
+    const emailInput = document.getElementById('emailUsuario');
+    if (emailInput && emailParaRecuperacao) {
+        emailInput.value = emailParaRecuperacao;
+        console.log('Email preenchido no campo hidden:', emailInput.value);
+    }
+
+    async function redefinirSenha() {
+        console.log('=== redefinirSenha() INICIADA ===');
+        
+        const novaSenha = document.getElementById('novaSenha').value;
+        const confirmarSenha = document.getElementById('confirmarSenha').value;
+        const mensagemDiv = document.getElementById('mensagem');
+
+        // Obtém o email novamente (para garantir)
+        const emailRecuperacao = obterEmailRecuperacao();
+        console.log('Email no momento do clique:', emailRecuperacao);
+        
+        if (!emailRecuperacao) {
+            const errorMsg = 'Não foi possível identificar o email para recuperação. Por favor, solicite a recuperação novamente.';
+            console.error(errorMsg);
+            alert(errorMsg);
+            setTimeout(() => {
+                window.location.href = 'esqueceuSenha.html';
+            }, 3000);
+            return;
+        }
+
+        // Validações
+        if (!novaSenha || !confirmarSenha) {
+            alert('Por favor, preencha todos os campos');
+            return;
+        }
+
+        if (novaSenha.length < 6) {
+            alert('A senha deve ter pelo menos 6 caracteres');
+            return;
+        }
+
+        if (novaSenha !== confirmarSenha) {
+            alert('As senhas não coincidem');
+            return;
+        }
+
+        try {
+            console.log('Fazendo requisição para API...');
+            console.log('Email:', emailRecuperacao);
+            console.log('Nova senha:', novaSenha);
+            
+            const response = await fetch('http://localhost:8080/api/usuarios/redefinir-senha', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    email: emailRecuperacao,
+                    novaSenha: novaSenha
+                })
+            });
+
+            console.log('Status da resposta:', response.status);
+
+            const data = await response.json();
+            console.log('Resposta da API:', data);
+
+            if (response.ok) {
+                alert('Senha redefinida com sucesso! Redirecionando para login...');
+                
+                // Limpa os dados de login (força novo login)
+                localStorage.removeItem('usuarioLogado');
+                localStorage.removeItem('pacienteLogado');
+                localStorage.removeItem('psicologoLogado');
+                localStorage.removeItem('emailRecuperacao');
+                
+                console.log('Dados limpos do localStorage');
+                
+                // Redireciona para o login
+                setTimeout(() => {
+                    window.location.href = 'login.html';
+                }, 2000);
+            } else {
+                alert('Erro: ' + (data.error || 'Erro ao redefinir senha'));
+            }
+
+        } catch (error) {
+            console.error('Erro:', error);
+            alert('Erro de conexão. Tente novamente.');
+        }
+        
+        console.log('=== redefinirSenha() FINALIZADA ===');
+    }
+
+    // Configura o evento de clique
+    document.addEventListener('DOMContentLoaded', function() {
+        console.log('DOM carregado - Configurando botão');
+        
+        const btnRedefinir = document.getElementById('btnRedefinir');
+        if (btnRedefinir) {
+            btnRedefinir.addEventListener('click', redefinirSenha);
+            console.log('Botão configurado com sucesso');
+        }
+    });
+
+    // Torna a função global
+    window.redefinirSenha = redefinirSenha;
+    
+    console.log('redefinirSenha disponível:', typeof window.redefinirSenha);
+    console.log('=== PÁGINA PRONTA ===');
+  </script>
+</body>
+</html>
