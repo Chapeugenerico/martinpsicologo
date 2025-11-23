@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/esqueceuSenha.css">
+  <link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
+  <title>Esqueceu a Senha</title>
+</head>
+<body>
+  <div class="cadastro">
+    <div class="esquerda">
+      <img src="./assets/img/logo psicologo.jpg" alt="Logo Psicólogo">
+    </div>
+
+    <div class="direita">
+      <a href="login.html" class="btn-voltar">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 13L5 8L10 3" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+        Voltar
+      </a>
+
+      <br><br><br><br>
+
+      <form id="esqueceuSenhaForm">
+        <input type="email" name="email" id="email" placeholder="Email" required>
+        <input type="text" name="codigo" id="codigo" placeholder="Código de verificação" style="display: none; margin-top: 10px;">
+        
+        <div id="mensagem" style="display: none; margin: 10px 0; padding: 10px; border-radius: 5px;"></div>
+
+        <div class="botoes">
+          <br>
+          <button type="button" class="button" id="btnEnviarEmail" onclick="resetPassword()">Enviar código</button>
+          <button type="button" class="button" id="btnValidarCodigo" onclick="validarToken()" style="display: none;">Validar código</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="js/esqueceuSenha.js"></script>
+</body>
+</html>

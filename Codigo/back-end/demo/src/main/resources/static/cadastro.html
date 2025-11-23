@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/cadastro.css">
+  <link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
+  <title>Cadastro</title>
+</head>
+
+<body>
+  <div class="cadastro">
+    <div class="esquerda">
+      <img src="./assets/img/logo psicologo.jpg" alt="Logo Psicólogo">
+    </div>
+
+    <div class="direita">
+
+      
+      <!-- Botão Voltar -->
+      <a href="login.html" class="btn-voltar">
+        <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M10 13L5 8L10 3" stroke="currentColor" stroke-width="2" stroke-linecap="round"
+            stroke-linejoin="round" />
+        </svg>
+        Voltar
+      </a>
+
+      <!-- Botão Google -->
+     <!-- <button class="google-btn">
+        <img src="./assets/img/google.png" alt="Google">
+        Continue com Google
+      </button> -->
+
+      <!-- Divisor -->
+     <!-- <div class="or-divider">
+        <hr><span>ou</span>
+        <hr>
+      </div>-->
+      <div>
+        <h1>Cadastre-se</h1>
+      </div>
+
+       <form id="cadastroForm">
+        <input type="text" name="nome" placeholder="Nome" required>
+        <div class="checkbox">
+          <input type="checkbox" id="meuCheckbox" name="meuCheckbox" style="color: rgb(242, 242, 242, 0.5);" >
+          <label for="meuCheckbox" >Nome Social</label>
+        </div>
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="text" name="telefone" placeholder="Telefone" required>
+        <input type="password" name="senha" placeholder="Senha" required>
+        <div class="linha">
+          <input type="text" name="cpf" placeholder="CPF">
+          <input type="text" name="cep" placeholder="CEP">
+        </div>
+
+        <button type="submit" class="button">Criar conta</button>
+      </form>
+    </div>
+  </div>
+  <script src="js/cadastro.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,599 @@
+body {
+    background-color: #73022C;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+header {
+    position: relative;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #73022C;
+    height: 50px;
+}
+
+img.logo {
+    width: 150px;
+    height: 150px;
+    border-radius: 10px;
+    display: block;
+    margin: 0 auto;
+
+    position: absolute;
+    top: 10px;
+    left: 10px;
+
+    z-index: 1;
+}
+
+img.logout {
+    display: block;
+    width: 50px;
+    height: 50px;
+    border-radius: 10px;
+    margin: 30px 10px;
+
+    position: absolute;
+    top: 20px;
+    right: 20px;
+
+    cursor: pointer;
+
+    z-index: 1;
+}
+
+main {
+    padding: 40px;
+    margin-top: 60px;
+}
+
+/* Adicionar estilo do botão Home no cabeçalho */
+button.btn-aba-home {
+    background-color: #591636;
+    transition: background-color 0.3s ease;
+    border-radius: 10px; /* Arredondado em todos os cantos */
+    width: 100px;
+    height: 40px;
+    padding: 0 10px;
+    
+    font-size: large;
+    color: #FFFFFF;
+    
+    cursor: pointer;
+    border: none;
+    
+    /* Posição no header, próximo ao logout */
+    position: absolute;
+    top: 2em;
+    z-index: 1;
+}
+
+button.btn-aba-home:hover {
+    background-color: #FFFFFF;
+    color: #73022C;
+
+}
+
+button.btn-aba-home h4 {
+    margin: 0;
+    position: relative;
+    top: 0;
+}
+
+/* Ajustes de Media Query */
+@media (max-width: 768px) {
+    button.btn-aba-home {
+        width: 80px;
+        height: 35px;
+        font-size: 12px;
+        right: 70px; /* Ajuste para o botão home */
+        top: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    button.btn-aba-home {
+        width: 70px;
+        height: 30px;
+        font-size: 10px;
+        right: 60px; /* Ajuste para o botão home */
+        top: 20px;
+    }
+}
+
+.abas {    
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+    gap: 5px;
+    max-width: 100%;
+    margin: 0 auto;
+}
+
+button.btn-aba,
+button.btn-aba-1 {
+    background-color: #591636;
+    transition: background-color 0.3s ease;
+
+    border-radius: 10px 10px 0 0;
+    width: 150px;
+    height: 50px;
+
+    position: relative;
+    top: 2px;
+    
+    font-size: large;
+    color: #FFFFFF;
+
+    cursor: pointer;
+
+    z-index: 2;
+}
+
+button.btn-aba h4,
+button.btn-aba-1 h4 {
+    position: relative;
+    top: -2x;
+    margin: 0;
+}
+
+button.btn-aba-1 {
+    background-color: #FFFFFF;
+    color: #591636;
+}
+
+main.abas button:hover {
+    background-color: #591636;
+}
+
+.background-perfil {
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+
+    position: relative;
+
+    z-index: 2;
+}
+
+.box {
+    background-color: #d8d7e0;
+    border-radius: 50px;
+    margin: 5%;
+    padding: 2%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Centraliza e ajusta a tabela */
+.table-wrapper {
+    display: flex;
+    justify-content: center; /* centraliza horizontalmente */
+    padding: 10px 0;
+}
+
+.pacientes-table {
+    width: 100%;
+    max-width: 1000px; /* limita a largura para manter legibilidade */
+    border-collapse: collapse;
+    background: #fff;
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 2px 6px rgba(0,0,0,0.08);
+}
+
+.pacientes-table thead th {
+    background-color: #591636;
+    color: #ffffff;
+    text-align: left;
+    padding: 14px 18px;
+    font-size: 16px;
+}
+
+.pacientes-table tbody td {
+    padding: 12px 18px;
+    border-bottom: 1px solid rgba(0,0,0,0.06);
+    color: #222;
+}
+
+.pacientes-table tbody tr:last-child td {
+    border-bottom: none;
+}
+
+.pacientes-table td, .pacientes-table th {
+    vertical-align: middle;
+}
+
+.pacientes-table tbody tr:hover {
+    background-color: rgba(89,22,54,0.04);
+}
+
+.prontuaria {
+    background-color: #591636;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    border-radius: 8px;
+    cursor: pointer;
+}
+
+.prontuaria:hover {
+    background-color: #73022C;
+}
+
+/* Mantendo todo o seu CSS original e adicionando apenas estas classes */
+
+.controles-superiores {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    gap: 15px;
+}
+
+.pesquisa-container {
+    display: flex;
+    flex: 1;
+    max-width: 400px;
+}
+
+.campo-pesquisa {
+    flex: 1;
+    padding: 10px 15px;
+    border: 2px solid #e1e5e9;
+    border-radius: 8px 0 0 8px;
+    font-size: 14px;
+    border: 2px solid #591636;
+}
+
+.btn-pesquisa {
+    background: #591636;
+    color: white;
+    border: none;
+    border-radius: 0 8px 8px 0;
+    padding: 10px 15px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.btn-pesquisa:hover {
+    background: #73022C;
+}
+
+.btn-adicionar-paciente {
+    background: #591636;
+    color: white;
+    border: none;
+    border-radius: 8px;
+    padding: 10px 16px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.btn-adicionar-paciente:hover {
+    background: #73022C;
+}
+
+.controles-inferiores {
+    margin-top: 15px;
+    text-align: center;
+}
+
+.info-contador {
+    color: #591636;
+    font-size: 14px;
+    font-weight: bold;
+}
+
+/* Status de Pagamento - mantendo suas cores */
+.status-pago {
+    color: #27ae60;
+    font-weight: 600;
+}
+
+.status-pendente {
+    color: #e67e22;
+    font-weight: 600;
+}
+
+.status-reembolsado {
+    color: #3498db;
+    font-weight: 600;
+}
+
+.status-cancelado {
+    color: #e74c3c;
+    font-weight: 600;
+}
+
+.sessoes-restantes {
+    background: #591636;
+    color: white;
+    padding: 4px 8px;
+    border-radius: 12px;
+    font-size: 12px;
+    font-weight: 600;
+    text-align: center;
+    display: inline-block;
+    min-width: 25px;
+}
+
+/* Botões de Ação */
+.botoes-acao {
+    display: flex;
+    gap: 5px;
+}
+
+.btn-prontuario {
+    background: #591636;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+    transition: background-color 0.3s;
+}
+
+.btn-prontuario:hover {
+    background: #73022C;
+}
+
+.btn-editar {
+    background: #f39c12;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.btn-editar:hover {
+    background: #e67e22;
+}
+
+.btn-excluir {
+    background: #e74c3c;
+    color: white;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 12px;
+}
+
+.btn-excluir:hover {
+    background: #c0392b;
+}
+
+/* Modal Styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.5);
+}
+
+.modal-content {
+    background-color: white;
+    margin: 5% auto;
+    padding: 0;
+    border-radius: 10px;
+    width: 90%;
+    max-width: 500px;
+    max-height: 90vh;
+    overflow-y: auto;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+}
+
+.modal-grande {
+    max-width: 700px;
+}
+
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 24px;
+    border-bottom: 1px solid #e1e5e9;
+    background: #591636;
+    color: white;
+    border-radius: 10px 10px 0 0;
+}
+
+.modal-header h3 {
+    margin: 0;
+    color: white;
+}
+
+.fechar-modal {
+    font-size: 24px;
+    cursor: pointer;
+    color: white;
+}
+
+.fechar-modal:hover {
+    color: #f0f0f0;
+}
+
+.modal-body {
+    padding: 20px 24px;
+}
+
+#formPaciente {
+    padding: 24px;
+}
+
+.form-duplo {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+}
+
+.form-group {
+    margin-bottom: 16px;
+}
+
+.form-group label {
+    display: block;
+    margin-bottom: 6px;
+    font-weight: 500;
+    color: #591636;
+    font-size: 14px;
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+    width: 100%;
+    padding: 10px 12px;
+    border: 2px solid #e1e5e9;
+    border-radius: 6px;
+    font-size: 14px;
+    transition: border-color 0.3s;
+    border: 2px solid #591636;
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+    outline: none;
+    border-color: #73022C;
+}
+
+.modal-buttons {
+    display: flex;
+    gap: 12px;
+    justify-content: flex-end;
+    margin-top: 24px;
+}
+
+.btn-salvar, .btn-confirmar {
+    background: #591636;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background-color 0.3s;
+}
+
+.btn-salvar:hover, .btn-confirmar:hover {
+    background: #73022C;
+}
+
+.btn-cancelar {
+    background: #95a5a6;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+.btn-cancelar:hover {
+    background: #7f8c8d;
+}
+
+/* Prontuário */
+.prontuario-content {
+    padding: 24px;
+}
+
+.prontuario-info,
+.prontuario-anotacoes {
+    margin-bottom: 24px;
+}
+
+.prontuario-info h4,
+.prontuario-anotacoes h4 {
+    margin-bottom: 12px;
+    color: #591636;
+    border-bottom: 2px solid #591636;
+    padding-bottom: 8px;
+}
+
+.btn-salvar-anotacao {
+    background: #591636;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin-top: 12px;
+    transition: background-color 0.3s;
+}
+
+.btn-salvar-anotacao:hover {
+    background: #73022C;
+}
+
+/* Responsivo */
+@media (max-width: 768px) {
+    .controles-superiores {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .pesquisa-container {
+        max-width: none;
+    }
+    
+    .form-duplo {
+        grid-template-columns: 1fr;
+    }
+    
+    .botoes-acao {
+        flex-direction: column;
+    }
+    
+    .modal-content {
+        margin: 10% auto;
+        width: 95%;
+    }
+}
+
+
+
+/* Responsividade */
+@media (max-width: 700px) {
+    .pacientes-table thead {
+        display: none; /* esconde cabeçalho em telas pequenas para layout card */
+    }
+    .pacientes-table, .pacientes-table tbody, .pacientes-table tr, .pacientes-table td {
+        display: block;
+        width: 100%;
+    }
+    .pacientes-table tr {
+        margin-bottom: 12px;
+        border-radius: 8px;
+        background: #fff;
+        box-shadow: 0 1px 3px rgba(0,0,0,0.06);
+    }
+    .pacientes-table td {
+        padding: 10px 12px;
+        text-align: right;
+        position: relative;
+    }
+    .pacientes-table td::before {
+        content: attr(data-label);
+        float: left;
+        font-weight: 700;
+        color: #591636;
+    }
+}
+

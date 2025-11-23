@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="css/login.css">
+  <link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
+  <title>Login</title>
+</head>
+<body>
+  <div class="cadastro">
+    <div class="esquerda">
+      <img src="./assets/img/logo psicologo.jpg" alt="Logo Psicólogo">
+    </div>
+
+    <div class="direita">
+      <!-- Botão Google (comentado para não aparecer) -->
+      <!--
+      <button class="google-btn">
+        <img src="./assets/img/google.png" alt="Google">
+        Continue com Google
+      </button>
+      -->
+
+      <!-- Divisor -->
+       <!--
+      <div class="or-divider">
+        <hr><span>ou</span><hr>
+      </div>
+ -->
+      <div>
+        <h1>Entrar</h1>
+      </div>
+      <form id="loginForm">
+        <input type="email" name="email" placeholder="Email" required>
+        <input type="password" name="senha" placeholder="Senha" required>
+
+        <div class="botoes">
+            <a class="esqueciSenha" href="esqueceuSenha.html">Esqueci minha senha</a>
+          <button type="submit" class="button">Entrar</button>
+          
+        </div>
+      </form>
+
+      <!-- Divisor -->
+      <div class="or-divider">
+        <hr><span>ou</span><hr>
+      </div>
+
+      <div class="cadastro-link">
+    <p>Não tem uma conta?</p>
+    <a href="cadastro.html" class="btn-cadastro">Criar conta</a>
+</div>
+  </div>
+
+  <script src="js/login.js"></script>
+</body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Martin Psicólogo | Gerenciar Horários</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/perfilPsicologo.css">
+    <link rel="stylesheet" href="css/gerenciaHorario.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
+    
+    <!-- FullCalendar CSS -->
+    <link href='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.css' rel='stylesheet' />
+
+    <!-- Google Calendar API (comentado) -->
+    <!-- <script src="https://apis.google.com/js/api.js"></script> -->
+    <!-- <script src="https://accounts.google.com/gsi/client" async defer></script> -->
+</head>
+
+<body>
+    <header>
+        <img src="./assets/img/logo psicologo.jpg" alt="Logo" class="logo">
+        <button class="btn-aba-home" onclick="redirecionarPara('homePage.html')">
+            <h4>Início</h4>
+        </button>
+        <img src="./assets/img/logout.png" alt="logout" class="logout">
+    </header>
+
+    <main>
+        <div class="abas">
+            <button class="btn-aba"   onclick="redirecionarPara('perfilPsicologo.html')">   <h4>Perfil</h4>    </button>
+            <button class="btn-aba"   onclick="redirecionarPara('gerenciarPaciente.html')"> <h4>Pacientes</h4> </button>
+            <button class="btn-aba-1" onclick="redirecionarPara('gerenciaHorario.html')">   <h4>Horários</h4>  </button>
+            <button class="btn-aba"   onclick="redirecionarPara('relatorio.html')"> <h4>Relatório</h4> </button>
+        </div>
+
+        <div class="background-perfil">
+            <!-- Seção Adicionar Horário -->
+            <div class="secao-horario">
+                <h3>Adicionar Horário de Atendimento</h3>
+                <div class="form-horario">
+                    <div class="campo-horario">
+                        <label >Dia da semana</label>
+                        <select  id="diaSemana" name="diaSemana">
+                            <option value="">Selecione o dia</option>
+                            <option value="segunda-feira">Segunda-feira</option>
+                            <option value="terca-feira">Terça-feira</option>
+                            <option value="quarta-feira">Quarta-feira</option>
+                            <option value="quinta-feira">Quinta-feira</option>
+                            <option value="sexta-feira">Sexta-feira</option>
+                            <option value="sabado">Sábado</option>
+                            <option value="domingo">Domingo</option>
+                        </select>
+                    </div>
+                    
+                    <div class="horarios-linha">
+                        <div class="campo-horario">
+                            <label>Início</label>
+                            <input type="time" id="horaInicio" name="horaInicio" placeholder="hh:mm">
+                        </div>
+                        
+                        <div class="campo-horario">
+                            <label>Fim</label>
+                            <input type="time" id="horaFim" name="horaFim" placeholder="hh:mm">
+                        </div>
+                    </div>
+                    
+                    <div class="campo-horario">
+                        <label>Repetição</label>
+                        <select id="repeticao" name="repeticao">
+                            <option value="once">Apenas uma vez</option>
+                            <option value="weekly">Semanal</option>
+                            <option value="biweekly">Quinzenal</option>
+                        </select>
+                    </div>
+
+                    <div class="campo-horario">
+                        <label>Alcance</label>
+                        <select id="alcance" name="alcance">
+                            <option value="mensal">Mensal (apenas dentro do próximo mês)</option>
+                            <option value="anual" selected>Anual (aparecer nos próximos 12 meses)</option>
+                        </select>
+                    </div>
+                    
+                    <button class="btn-adicionar" id="btnAdicionar">Adicionar</button>
+                </div>
+            </div>
+
+            <!-- Seção Remover Horário -->
+            <div class="secao-horario">
+                <h3>Remover Horário de Atendimento</h3>
+                <div class="form-horario">
+                    <div class="campo-remover">
+                        <div class="campo-horario">
+                            <label>Selecionar horário</label>
+                            <select id="horarioSelecionado" name="horarioSelecionado">
+                                <option value="">Selecione um horário</option>
+                                <!-- Opções de horários serão preenchidas dinamicamente -->
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <button class="btn-remover" id="btnRemover">Remover</button>
+                </div>
+            </div>
+
+            <!-- Seção Agenda de Atendimento -->
+            <div class="secao-horario" >
+                
+                    <h3>Agenda de Atendimento</h3>
+                    <div class="calendar-controls">
+                        
+                    </div>
+                    <div id="calendar" style="margin-top:16px;"></div>
+              <!-- modal para cancelar e reagendar-->  
+               
+                
+                
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- Importa o FullCalendar -->
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/main.min.js'></script>
+<script src='https://cdn.jsdelivr.net/npm/fullcalendar@5.11.3/locales/pt-br.js'></script>
+
+    <script src="js/gerenciaHorario.js"></script>
+    <script>
+        // Função para redirecionar páginas
+        function redirecionarPara(pagina) {
+            window.location.href = pagina;
+        }
+    </script>
+    <!-- Modal de confirmação padronizado -->
+    <div id="modalCancelamento" class="modal" aria-hidden="true" style="display:none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitle">Cancelar Agendamento</h3>
+                <button id="modalClose" class="modal-close" aria-label="Fechar">×</button>
+            </div>
+            <div class="modal-body" id="modalBody">
+                <!-- Conteúdo preenchido dinamicamente -->
+            </div>
+            <div class="modal-actions">
+                <button id="confirmCancel" class="btn-remover">Cancelar Agendamento</button>
+                <button id="rescheduleBtn" class="btn-adicionar">Reagendar</button>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

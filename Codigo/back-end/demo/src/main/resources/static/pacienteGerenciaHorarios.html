@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <title>Martin Psicólogo | Perfil do Paciente</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/homepage.css">
+    <link rel="stylesheet" href="css/perfilPaciente.css">
+    <link rel="stylesheet" href="css/pacienteGerenciaHorarios.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="logo-container">
+            <a href="homePage.html" aria-label="Página inicial"><img src="./assets/img/logo psicologo.jpg" alt="Logo" class="logo"></a>
+        </div>
+        <div class="nav-links">
+            <a href="homePage.html" class="active" aria-current="page">Início</a>
+            <a href="perfilPaciente.html" class="active" aria-current="page">Perfil</a>
+            <a href="pacienteGerenciaHorarios.html">Agenda</a>
+            <a href="agendarHorario.html">Agendar Horário</a>
+            <button id="logoutBtn" class="logout-btn" type="button" aria-label="Sair">Logout</button>
+        </div>
+        <div id="userInfo" class="user-info" aria-live="polite"></div>
+    </nav>
+
+    
+
+    <main style="margin-top: 5%;">
+        <div class="tabs" aria-label="Navegação secundária">
+            <button class="tab">
+                <a href="perfilPaciente.html" class="nav-link" aria-current="false">Perfil</a>
+            </button>
+            <button class="tab active">
+                <a href="pacienteGerenciaHorarios.html" class="nav-link-on" aria-current="page">Agenda</a>
+            </button>
+        </div>
+
+
+        <!-- Seção Horários -->
+        <section class="card" id="horariosSection">
+            <h2>Meus Horários</h2>
+            <div id="horariosList">
+                <!-- Horários serão carregados aqui -->
+            </div>
+        </section>
+    </main>
+
+    
+    <script src="js/auth.js"></script>
+    <script src="js/PacienteGerenciaHorarios.js"></script>
+    
+</body>
+</html>

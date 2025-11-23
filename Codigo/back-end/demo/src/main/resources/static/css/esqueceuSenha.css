@@ -1,0 +1,194 @@
+body {
+  font-family: 'Istok Web', Arial, sans-serif;
+  background-color: #73022C;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+}
+
+.cadastro {
+ display: flex;
+  background-color: #8C0336;
+  border-radius: 20px;
+  box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.2);
+  overflow: hidden;
+  width: 1000px;
+  max-width: 90%;
+}
+
+.esquerda {
+ width: 40%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #73022C;
+  padding: 40px;
+}
+
+.esquerda img {
+ width: 100%;
+  border-radius: 15px;
+}
+
+.direita {
+  width: 60%;
+  padding: 40px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.or-divider {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  margin: 10px 0 20px 0;
+  color: #fff;
+}
+
+.or-divider hr {
+  flex: 1;
+  border: none;
+  height: 1px;
+  background-color: #fff;
+}
+
+.or-divider span {
+  margin: 0 10px;
+  font-size: 14px;
+}
+
+form {
+  width: 100%;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="password"] {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  margin-bottom: 15px;
+  border: none;
+  background-color: rgba(217, 217, 217, 0.5);
+  font-size: 16px;
+  box-sizing: border-box;
+}
+
+.linha {
+  display: flex;
+  gap: 10px;
+}
+
+.linha input {
+  flex: 1;
+}
+
+.button {
+  width: 40%;
+  padding: 8px;
+  background-color: #73022C;
+  color: #fff;
+  font-size: 16px;
+  border: none;
+  border-radius: 20px;
+  cursor: pointer;
+}
+button:hover {
+  background-color: #c796a6;
+}
+
+.botoes {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 10px;
+}
+
+.esqueciSenha {
+  display: inline-block;
+  width: 40%;
+  padding: 8px;
+  font-size: 14px;
+  text-align: center;
+  text-decoration: underline;
+  color: #fff;
+  
+  line-height: normal;
+}
+
+.esqueciSenha:hover {
+  text-decoration: underline;
+  color: #f49fbc;
+}
+::placeholder {
+  color: rgb(242, 242, 242);
+  opacity: 1; /* Firefox */
+}
+
+.btn-voltar {
+      position: absolute;
+      top: 20px;
+      left: 20px;
+      color: #fff;
+      text-decoration: none;
+      font-size: 16px;
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: color 0.3s;
+      border: 2px solid #ffffff;
+      padding: 8px 16px;
+      border-radius: 25px;
+      background-color: rgba(115, 2, 44, 0.8);
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+      
+    }
+
+    .btn-voltar:hover {
+      color: #f49fbc;
+      background-color: rgba(115, 2, 44, 1);
+      border: 2px solid #f49fbc;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    }
+
+/* --- Layout responsivo --- */
+@media (max-width: 768px) {
+  .cadastro {
+    flex-direction: column;       /* de lado para cima */
+    width: 95%;
+    max-width: 95%;/* altura automática */
+  }
+  .esquerda, .direita {
+    width: 100%;
+  }
+
+
+  .esquerda {
+    width: 100%; /* ocupa toda a largura */
+    padding: 10px;
+  }
+
+  .esquerda img {
+    width: 200px;       /* tamanho fixo da logo */
+    max-width: 80%;     /* garante que não estoura */
+    height: auto;
+    display: block;
+    margin: 0 auto; /* não ultrapassa a largura */
+  }
+
+  .direita {
+    width: 90%; /* ocupa toda a largura */
+    padding: 20px;
+  }
+
+  .btn-voltar {
+        top: 10px;
+        left: 10px;
+        font-size: 14px;
+      }
+}

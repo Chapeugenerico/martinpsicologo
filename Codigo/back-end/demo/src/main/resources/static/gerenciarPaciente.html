@@ -1,0 +1,342 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <title> Martin Psicólogo | Gerenciar Pacientes</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/gerenciarPaciente.css">
+    <link rel="stylesheet" href="css/popupGerenciarPaciente.css">
+    <link href="https://fonts.googleapis.com/css2?family=Material+Icons+Outlined" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/css/intlTelInput.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/intlTelInput.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <img src="./assets/img/logo psicologo.jpg" alt="Logo" class="logo">
+        <button class="btn-aba-home" onclick="redirecionarPara('homePage.html')">
+            <h4>Início</h4>
+        </button>
+        <img src="./assets/img/logout.png" alt="logout" class="logout">
+    </header>
+
+    <main>
+        <div class="abas">
+            <button class="btn-aba" onclick="redirecionarPara('perfilPsicologo.html')">
+                <h4>Perfil</h4>
+            </button>
+            <button class="btn-aba-1" onclick="redirecionarPara('gerenciarPaciente.html')">
+                <h4>Pacientes</h4>
+            </button>
+            <button class="btn-aba" onclick="redirecionarPara('gerenciaHorario.html')">
+                <h4>Horários</h4>
+            </button>
+            <button class="btn-aba" onclick="redirecionarPara('relatorio.html')">
+                <h4>Relatório</h4>
+            </button>
+        </div>
+
+        <div class="background-perfil">
+            <!-- Barra de Pesquisa e Adicionar -->
+            <div class="controles-superiores">
+                <div class="pesquisa-container">
+                    <input type="text" id="campoPesquisa" placeholder="Pesquisar paciente..." class="campo-pesquisa">
+                    <button class="btn-pesquisa" id="btnPesquisa">
+                        🔍
+                    </button>
+                </div>
+
+                <button class="btn-adicionar-paciente" id="btnAdicionarPaciente">
+                    ➕ Adicionar Paciente
+                </button>
+                <!-- Botão de Gestão de Sessões e Pagamentos (visível mesmo sem pacientes para testes) -->
+                <button class="btn-gestao-sessao" id="btnGestaoSessao" title="Abrir Gestão de Sessões e Pagamentos para testes">
+                    Gestão de Sessões e Pagamento
+                </button>
+            </div>
+
+            <div class="box">
+                <div class="table-wrapper">
+                    <table class="pacientes-table">
+                        <thead>
+                            <tr>
+                                <th>Paciente</th>
+                                <th>Próxima Sessão</th>
+                                <th>Sessões Restantes</th>
+                                <th>Pagamento</th>
+                                <th>Prontuário</th>
+                                
+                            </tr>
+                        </thead>
+                        <tbody id="pacientes">
+                            <tr id="loading">
+                                <td colspan="5" style="text-align:center">Carregando dados...</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Contador -->
+            <div class="controles-inferiores">
+                <div class="info-contador">
+                    Total de pacientes: <span id="contadorPacientes">0</span>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Modal Adicionar Paciente -->
+    <div id="modalPaciente" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTitulo">Adicionar Novo Paciente</h3>
+                <span class="fechar-modal">&times;</span>
+            </div>
+            <form id="formPaciente">
+                <input type="hidden" id="pacienteId">
+
+                <div class="form-group">
+                    <label for="nome">Nome Completo *</label>
+                    <input type="text" id="nome" name="nome" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="email">Email *</label>
+                    <input type="email" id="email" name="email" required>
+                </div>
+
+                <div class="form-group">
+                    <label for="telefone">Telefone</label>
+                    <input type="tel" id="telefone" name="telefone">
+                </div>
+
+                <div class="form-group">
+                    <label>Próxima Sessão</label>
+                    <div class="horarios-linha">
+                        <div class="campo-horario">
+                            <label for="proximaSessaoPacienteDate">Data</label>
+                            <input type="date" id="proximaSessaoPacienteDate" name="proximaSessaoPacienteDate">
+                        </div>
+                        <div class="campo-horario">
+                            <label for="horaInicioPaciente">Início</label>
+                            <input type="time" id="horaInicioPaciente" name="horaInicioPaciente" placeholder="hh:mm">
+                        </div>
+                    </div>
+                </div>
+
+                <div class="modal-buttons">
+                    <button type="submit" class="btn-salvar">Salvar</button>
+                    <button type="button" class="btn-cancelar">Cancelar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+
+    <!-- Modal Prontuário -->
+    <div id="modalProntuario" class="modal">
+        <div class="modal-content modal-grande">
+            <div class="modal-header">
+                <h3>Prontuário - <span id="nomePacienteProntuario"></span></h3>
+                <span class="fechar-modal">&times;</span>
+            </div>
+            <div class="prontuario-content">
+                <div class="prontuario-info">
+                    <h4>Informações do Paciente</h4>
+                    <div id="infoPacienteProntuario"></div>
+                </div>
+
+                <div class="prontuario-anotacoes">
+                    <h4>Anotações da Sessão</h4>
+                    <textarea id="anotacoesProntuario" rows="6"
+                        placeholder="Registre as observações da sessão..."></textarea>
+                    <button class="btn-salvar-anotacao" id="btnSalvarAnotacao">Salvar Anotações</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- Modal Confirmação -->
+    <div id="modalConfirmacao" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Confirmar Exclusão</h3>
+                <span class="fechar-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p id="mensagemConfirmacao">Tem certeza que deseja excluir este paciente?</p>
+            </div>
+            <div class="modal-buttons">
+                <button id="btnConfirmarAcao" class="btn-confirmar">Confirmar</button>
+                <button id="btnCancelarAcao" class="btn-cancelar">Cancelar</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Popup Modal Visualizar Dados do Paciente -->
+<div id="modalDadosPaciente" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Dados do Paciente</h3>
+            <span class="fechar-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="dados-paciente-container">
+                <div class="campo-dados">
+                    <label>Nome Completo:</label>
+                    <span id="dadosNomeCompleto"></span>
+                </div>
+                <div class="campo-dados">
+                    <label>Telefone:</label>
+                    <span id="dadosTelefone"></span>
+                </div>
+                <div class="campo-dados">
+                    <label>E-mail:</label>
+                    <span id="dadosEmail"></span>
+                </div>
+            </div>
+            <div class="modal-buttons">
+                <button id="btnEditarPaciente" class="btn-salvar">Editar</button>
+                <button id="btnExcluirPaciente" class="btn-excluir">Excluir</button>
+                <button class="btn-cancelar fechar-modal">Fechar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Popup Modal Selecionar Tipo Anamnese -->
+<div id="modalTipoAnamnese" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Selecionar Tipo de Anamnese</h3>
+            <span class="fechar-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <div class="anamnese-options">
+                <div class="option-card" data-tipo="crianca">
+                    <div class="option-icon">👶</div>
+                    <h4>Criança</h4>
+                    <p>Anamnese para pacientes infantis (0-17 anos)</p>
+                </div>
+                
+                <div class="option-card" data-tipo="adulto">
+                    <div class="option-icon">👨‍💼</div>
+                    <h4>Adulto</h4>
+                    <p>Anamnese para pacientes adultos (+ 18 anos)</p>
+                </div>
+                
+            </div>
+            <div class="modal-buttons">
+                <button class="btn-cancelar fechar-modal">Cancelar</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!-- Modal Gestão de Sessões e Pagamentos -->
+<div id="modalGestaoSessao" class="modal">
+    <div class="modal-content">
+        <div class="modal-header">
+            <h3>Gestão de Sessões e Pagamentos</h3>
+            <span class="fechar-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form id="formSessao">
+                <input type="hidden" id="sessaoId">
+                <input type="hidden" id="sessaoPacienteId">
+
+                <div class="form-group">
+                    <label for="valorSessaoDisplay">Valor por sessão</label>
+                    <!-- Campo visível para o usuário (texto) -->
+                    <input type="text" id="valorSessaoDisplay" placeholder="R$ 0,00">
+                    <!-- Campo hidden que será enviado no submit com valor numérico (ponto decimal) -->
+                    <input type="hidden" id="valorSessao" name="valorSessao">
+                </div>
+
+                <div class="form-group">
+                    <label for="quantidadeSessoes">Quantidade de sessões</label>
+                    <input type="number" id="quantidadeSessoes" name="quantidadeSessoes" min="1" value="1">
+                </div>
+
+                <div class="form-group">
+                    <label>Modalidade da Sessão</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="modalidade" value="ONLINE"> Online
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="modalidade" value="PRESENCIAL"> Presencial
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Frequência da Sessão</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="frequencia" value="SEMANAL"> Semanal
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="frequencia" value="BIOSEMANAL"> Biosemanal
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="frequencia" value="ESPORADICA"> Esporádica
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label for="proximaSessaoDate">Próxima Sessão</label>
+                    <div class="horarios-linha">
+                        <div class="campo-horario">
+                            <label for="proximaSessaoDate">Data</label>
+                            <input type="date" id="proximaSessaoDate" name="proximaSessaoDate">
+                        </div>
+                        <div class="campo-horario">
+                            <label for="horaInicio">Início</label>
+                            <input type="time" id="horaInicio" name="horaInicio" placeholder="hh:mm">
+                        </div>
+                        <!-- hidden para compatibilidade com o JS existente -->
+                        <input type="hidden" id="proximaSessao" name="proximaSessao">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>Status do pagamento</label>
+                    <div class="radio-group">
+                        <label class="radio-label">
+                            <input type="radio" name="statusPagamento" value="PAGO"> Pago
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="statusPagamento" value="PENDENTE"> Pendente
+                        </label>
+                        <label class="radio-label">
+                            <input type="radio" name="statusPagamento" value="CANCELADO"> Cancelado
+                        </label>
+                    </div>
+                </div>
+
+                <div class="modal-buttons">
+                    <button type="button" class="btn-cancelar" onclick="fecharModal()">Cancelar</button>
+                    <button type="submit" class="btn-salvar">Salvar</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+    <script>
+        function redirecionarPara(pagina) {
+            window.location.href = pagina;
+        }
+    </script>
+
+
+</body>
+<script src="js/gerenciarPaciente.js"></script>
+
+</html>
