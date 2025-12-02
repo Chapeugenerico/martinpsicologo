@@ -50,10 +50,7 @@
                 <button class="btn-adicionar-paciente" id="btnAdicionarPaciente">
                     ➕ Adicionar Paciente
                 </button>
-                <!-- Botão de Gestão de Sessões e Pagamentos (visível mesmo sem pacientes para testes) -->
-                <button class="btn-gestao-sessao" id="btnGestaoSessao" title="Abrir Gestão de Sessões e Pagamentos para testes">
-                    Gestão de Sessões e Pagamento
-                </button>
+                
             </div>
 
             <div class="box">
@@ -176,158 +173,173 @@
         </div>
     </div>
 
+    <div id="modalAlertaExclusao" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 id="modalTituloAlerta">Atenção</h3>
+                <span class="fechar-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <p id="mensagemAlerta"></p>
+            </div>
+            <div class="modal-buttons">
+                <button id="btnEntendido" class="btn-cancelar fechar-modal">Entendido</button>
+            </div>
+        </div>
+    </div>
+
     <!-- Popup Modal Visualizar Dados do Paciente -->
-<div id="modalDadosPaciente" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3>Dados do Paciente</h3>
-            <span class="fechar-modal">&times;</span>
-        </div>
-        <div class="modal-body">
-            <div class="dados-paciente-container">
-                <div class="campo-dados">
-                    <label>Nome Completo:</label>
-                    <span id="dadosNomeCompleto"></span>
-                </div>
-                <div class="campo-dados">
-                    <label>Telefone:</label>
-                    <span id="dadosTelefone"></span>
-                </div>
-                <div class="campo-dados">
-                    <label>E-mail:</label>
-                    <span id="dadosEmail"></span>
-                </div>
+    <div id="modalDadosPaciente" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Dados do Paciente</h3>
+                <span class="fechar-modal">&times;</span>
             </div>
-            <div class="modal-buttons">
-                <button id="btnEditarPaciente" class="btn-salvar">Editar</button>
-                <button id="btnExcluirPaciente" class="btn-excluir">Excluir</button>
-                <button class="btn-cancelar fechar-modal">Fechar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-<!-- Popup Modal Selecionar Tipo Anamnese -->
-<div id="modalTipoAnamnese" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3>Selecionar Tipo de Anamnese</h3>
-            <span class="fechar-modal">&times;</span>
-        </div>
-        <div class="modal-body">
-            <div class="anamnese-options">
-                <div class="option-card" data-tipo="crianca">
-                    <div class="option-icon">👶</div>
-                    <h4>Criança</h4>
-                    <p>Anamnese para pacientes infantis (0-17 anos)</p>
-                </div>
-                
-                <div class="option-card" data-tipo="adulto">
-                    <div class="option-icon">👨‍💼</div>
-                    <h4>Adulto</h4>
-                    <p>Anamnese para pacientes adultos (+ 18 anos)</p>
-                </div>
-                
-            </div>
-            <div class="modal-buttons">
-                <button class="btn-cancelar fechar-modal">Cancelar</button>
-            </div>
-        </div>
-    </div>
-</div>
-
-
-<!-- Modal Gestão de Sessões e Pagamentos -->
-<div id="modalGestaoSessao" class="modal">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h3>Gestão de Sessões e Pagamentos</h3>
-            <span class="fechar-modal">&times;</span>
-        </div>
-        <div class="modal-body">
-            <form id="formSessao">
-                <input type="hidden" id="sessaoId">
-                <input type="hidden" id="sessaoPacienteId">
-
-                <div class="form-group">
-                    <label for="valorSessaoDisplay">Valor por sessão</label>
-                    <!-- Campo visível para o usuário (texto) -->
-                    <input type="text" id="valorSessaoDisplay" placeholder="R$ 0,00">
-                    <!-- Campo hidden que será enviado no submit com valor numérico (ponto decimal) -->
-                    <input type="hidden" id="valorSessao" name="valorSessao">
-                </div>
-
-                <div class="form-group">
-                    <label for="quantidadeSessoes">Quantidade de sessões</label>
-                    <input type="number" id="quantidadeSessoes" name="quantidadeSessoes" min="1" value="1">
-                </div>
-
-                <div class="form-group">
-                    <label>Modalidade da Sessão</label>
-                    <div class="radio-group">
-                        <label class="radio-label">
-                            <input type="radio" name="modalidade" value="ONLINE"> Online
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="modalidade" value="PRESENCIAL"> Presencial
-                        </label>
+            <div class="modal-body">
+                <div class="dados-paciente-container">
+                    <div class="campo-dados">
+                        <label>Nome Completo:</label>
+                        <span id="dadosNomeCompleto"></span>
+                    </div>
+                    <div class="campo-dados">
+                        <label>Telefone:</label>
+                        <span id="dadosTelefone"></span>
+                    </div>
+                    <div class="campo-dados">
+                        <label>E-mail:</label>
+                        <span id="dadosEmail"></span>
                     </div>
                 </div>
-
-                <div class="form-group">
-                    <label>Frequência da Sessão</label>
-                    <div class="radio-group">
-                        <label class="radio-label">
-                            <input type="radio" name="frequencia" value="SEMANAL"> Semanal
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="frequencia" value="BIOSEMANAL"> Biosemanal
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="frequencia" value="ESPORADICA"> Esporádica
-                        </label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label for="proximaSessaoDate">Próxima Sessão</label>
-                    <div class="horarios-linha">
-                        <div class="campo-horario">
-                            <label for="proximaSessaoDate">Data</label>
-                            <input type="date" id="proximaSessaoDate" name="proximaSessaoDate">
-                        </div>
-                        <div class="campo-horario">
-                            <label for="horaInicio">Início</label>
-                            <input type="time" id="horaInicio" name="horaInicio" placeholder="hh:mm">
-                        </div>
-                        <!-- hidden para compatibilidade com o JS existente -->
-                        <input type="hidden" id="proximaSessao" name="proximaSessao">
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label>Status do pagamento</label>
-                    <div class="radio-group">
-                        <label class="radio-label">
-                            <input type="radio" name="statusPagamento" value="PAGO"> Pago
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="statusPagamento" value="PENDENTE"> Pendente
-                        </label>
-                        <label class="radio-label">
-                            <input type="radio" name="statusPagamento" value="CANCELADO"> Cancelado
-                        </label>
-                    </div>
-                </div>
-
                 <div class="modal-buttons">
-                    <button type="button" class="btn-cancelar" onclick="fecharModal()">Cancelar</button>
-                    <button type="submit" class="btn-salvar">Salvar</button>
+                    <button id="btnEditarPaciente" class="btn-salvar">Editar</button>
+                    <button id="btnExcluirPaciente" class="btn-excluir">Excluir</button>
+                    <button class="btn-cancelar fechar-modal">Fechar</button>
                 </div>
-            </form>
+            </div>
         </div>
     </div>
-</div>
+
+    <!-- Popup Modal Selecionar Tipo Anamnese -->
+    <div id="modalTipoAnamnese" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Selecionar Tipo de Anamnese</h3>
+                <span class="fechar-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <div class="anamnese-options">
+                    <div class="option-card" data-tipo="crianca">
+                        <div class="option-icon">👶</div>
+                        <h4>Criança</h4>
+                        <p>Anamnese para pacientes infantis (0-17 anos)</p>
+                    </div>
+                    
+                    <div class="option-card" data-tipo="adulto">
+                        <div class="option-icon">👨‍💼</div>
+                        <h4>Adulto</h4>
+                        <p>Anamnese para pacientes adultos (+ 18 anos)</p>
+                    </div>
+                    
+                </div>
+                <div class="modal-buttons">
+                    <button class="btn-cancelar fechar-modal">Cancelar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- Modal Gestão de Sessões e Pagamentos -->
+    <div id="modalGestaoSessao" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Gestão de Sessões e Pagamentos</h3>
+                <span class="fechar-modal">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form id="formSessao">
+                    <input type="hidden" id="sessaoId">
+                    <input type="hidden" id="sessaoPacienteId">
+
+                    <div class="form-group">
+                        <label for="valorSessaoDisplay">Valor por sessão</label>
+                        <!-- Campo visível para o usuário (texto) -->
+                        <input type="text" id="valorSessaoDisplay" placeholder="R$ 0,00">
+                        <!-- Campo hidden que será enviado no submit com valor numérico (ponto decimal) -->
+                        <input type="hidden" id="valorSessao" name="valorSessao">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="quantidadeSessoes">Quantidade de sessões</label>
+                        <input type="number" id="quantidadeSessoes" name="quantidadeSessoes" min="1" value="1">
+                    </div>
+
+                    <div class="form-group">
+                        <label>Modalidade da Sessão</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="modalidade" value="ONLINE"> Online
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="modalidade" value="PRESENCIAL"> Presencial
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Frequência da Sessão</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="frequencia" value="SEMANAL"> Semanal
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="frequencia" value="BIOSEMANAL"> Biosemanal
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="frequencia" value="ESPORADICA"> Esporádica
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="proximaSessaoDate">Próxima Sessão</label>
+                        <div class="horarios-linha">
+                            <div class="campo-horario">
+                                <label for="proximaSessaoDate">Data</label>
+                                <input type="date" id="proximaSessaoDate" name="proximaSessaoDate">
+                            </div>
+                            <div class="campo-horario">
+                                <label for="horaInicio">Início</label>
+                                <input type="time" id="horaInicio" name="horaInicio" placeholder="hh:mm">
+                            </div>
+                            <!-- hidden para compatibilidade com o JS existente -->
+                            <input type="hidden" id="proximaSessao" name="proximaSessao">
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label>Status do pagamento</label>
+                        <div class="radio-group">
+                            <label class="radio-label">
+                                <input type="radio" name="statusPagamento" value="PAGO"> Pago
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="statusPagamento" value="PENDENTE"> Pendente
+                            </label>
+                            <label class="radio-label">
+                                <input type="radio" name="statusPagamento" value="CANCELADO"> Cancelado
+                            </label>
+                        </div>
+                    </div>
+
+                    <div class="modal-buttons">
+                        <button type="button" class="btn-cancelar" onclick="fecharModal()">Cancelar</button>
+                        <button type="submit" class="btn-salvar">Salvar</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 
     <script>
         function redirecionarPara(pagina) {

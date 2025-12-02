@@ -612,7 +612,7 @@ document.addEventListener('DOMContentLoaded', function() {
     // Atualização automática a cada 30 segundos
     setInterval(() => {
         carregarHorariosDoServidor().catch(err => console.error('Erro ao atualizar horários automaticamente:', err));
-    }, 30000);
+    }, 120000);
 });
 
 // Função auxiliar (pode ser copiada do agendarHorario.js)

@@ -19,6 +19,7 @@ async function carregarPacientes() {
         }
 
         pacientes = await res.json();
+        
 
         // Limpa a tabela
         tbody.innerHTML = '';
@@ -37,9 +38,15 @@ async function carregarPacientes() {
 
         //Para cada paciente, buscar a ultima sessão
         for (let p of pacientes) {
-            p.ultimaSessao = await buscarUltimaSessao(p.id);
+            try {
+                p.ultimaSessao = await buscarUltimaSessao(p.id);
+            } catch (error) {
+                // Se a busca por sessão falhar, o paciente ainda será listado,
+                // mas sua sessão será nula (p.ultimaSessao = null)
+                console.error(`Erro ao buscar última sessão do paciente ${p.nome} (ID: ${p.id}):`, error);
+                p.ultimaSessao = null;
+            }
             console.log('Paciente:', p.nome, 'Última sessão:', p.ultimaSessao);
-
         }
 
 
@@ -199,24 +206,24 @@ function atualizarValorSessaoHidden() {
 }
 
 function converterSessaoParaAgendamento(sessao) {
-  if (!sessao || !sessao.paciente || !sessao.proximaSessao) {
-    console.error('Sessão inválida ou incompleta');
-    return null;
-  }
+    if (!sessao || !sessao.paciente || !sessao.proximaSessao) {
+        console.error('Sessão inválida ou incompleta');
+        return null;
+    }
 
-  const dataHora = new Date(sessao.proximaSessao);
+    const dataHora = new Date(sessao.proximaSessao);
 
-  const agendamento = {
-    usuCodigo: sessao.paciente.id,
-    data: dataHora.toISOString().split('T')[0], // yyyy-MM-dd
-    horario: dataHora.toTimeString().split(' ')[0], // HH:mm:ss
-    isOnline: sessao.modalidade === 'ONLINE',
-    valorSessao: sessao.valorSessao,
-    quantidadePacote: null,
-    quantidadeRestante: null
-  };
+    const agendamento = {
+        usuCodigo: sessao.paciente.id,
+        data: dataHora.toISOString().split('T')[0], // yyyy-MM-dd
+        horario: dataHora.toTimeString().split(' ')[0], // HH:mm:ss
+        isOnline: sessao.modalidade === 'ONLINE',
+        valorSessao: sessao.valorSessao,
+        quantidadePacote: null,
+        quantidadeRestante: null
+    };
 
-  return agendamento;
+    return agendamento;
 }
 
 
@@ -275,9 +282,9 @@ async function salvarSessao(e) {
     }
 
     // DEBUG: Verificar o valor do campo de data
-    console.log('=== DEBUG SESSÃO ===');
-    console.log('proximaSessaoInput:', proximaSessaoInput);
-    console.log('Tipo de proximaSessaoInput:', typeof proximaSessaoInput);
+    // console.log('=== DEBUG SESSÃO ===');
+    // console.log('proximaSessaoInput:', proximaSessaoInput);
+    // console.log('Tipo de proximaSessaoInput:', typeof proximaSessaoInput);
 
     const dadosSessao = {
         paciente: { id: parseInt(pacienteId) },
@@ -351,8 +358,27 @@ async function salvarSessao(e) {
     }
 }
 
-// Abre o formulário de prontuário para o paciente selecionado 
+function abrirModalAlertaExclusao(nome) {
+    // Fecha qualquer modal que esteja aberto
+    fecharModal(); 
 
+    // Obtém o elemento do modal
+    const modalAlerta = document.getElementById('modalAlertaExclusao');
+    if (!modalAlerta) {
+        // Fallback simples caso o HTML não tenha sido adicionado
+        alert(`O paciente "${nome}" não pode ser excluído pois possui uma SESSÃO AGENDADA. Por favor, cancele ou remova o agendamento futuro antes de tentar a exclusão.`);
+        return;
+    }
+
+    // Preenche o conteúdo do modal de alerta
+    document.getElementById('modalTituloAlerta').textContent = 'Atenção';
+    document.getElementById('mensagemAlerta').innerHTML = 
+        `O paciente ${nome} não pode ser excluído pois possui uma sessão agendada. Por favor, remova o agendamento futuro antes de tentar a exclusão.`;
+
+    modalAlerta.style.display = 'block';
+}
+
+// Abre o formulário de prontuário para o paciente selecionado 
 // Função para abrir prontuário - VERIFICA SE JÁ EXISTE
 async function abrirProntuario(id) {
     pacienteSelecionadoId = id;
@@ -472,6 +498,15 @@ function editarPaciente(id) {
 function abrirModalConfirmacaoExclusao(id) {
     const paciente = pacientes.find(p => p.id === id);
     if (!paciente) return;
+
+    // Verifica se o paciente possui dados de sessão e se a próxima sessão não é null/undefined
+    const temProximaSessao = paciente.ultimaSessao && paciente.ultimaSessao.proximaSessao;
+
+    if (temProximaSessao) {
+        // Se houver próxima sessão agendada, ABRE O ALERTA e impede a exclusão
+        abrirModalAlertaExclusao(paciente.nome);
+        return; // Sai da função, não abre o modal de confirmação de exclusão.
+    }
 
     // Configurar a mensagem de confirmação
     document.getElementById('mensagemConfirmacao').textContent = 
@@ -823,6 +858,7 @@ function atualizarContador(total) {
 
 function fecharModal() {
     document.getElementById('modalPaciente').style.display = 'none';
+    document.getElementById('modalAlertaExclusao').style.display = 'none';
     document.getElementById('modalProntuario').style.display = 'none';
     document.getElementById('modalDadosPaciente').style.display = 'none';
     document.getElementById('modalConfirmacao').style.display = 'none';
@@ -830,6 +866,11 @@ function fecharModal() {
     // Fecha também o modal de gestão de sessões (adicionado para que X/Cancelar funcionem nesse modal)
     const modalGestao = document.getElementById('modalGestaoSessao');
     if (modalGestao) modalGestao.style.display = 'none';
+
+    const modalAlerta = document.getElementById('modalAlertaExclusao');
+    if (modalAlerta) {
+        modalAlerta.style.display = 'none';
+    }
 }
 
 // Configura eventos quando a página carrega

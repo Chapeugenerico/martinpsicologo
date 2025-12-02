@@ -478,6 +478,7 @@ main.abas button:hover {
     gap: 12px;
     justify-content: flex-end;
     margin-top: 24px;
+    padding: 0 24px 20px 24px;
 }
 
 .btn-salvar, .btn-confirmar {

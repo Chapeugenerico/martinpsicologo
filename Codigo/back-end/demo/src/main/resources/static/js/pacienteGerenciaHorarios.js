@@ -50,7 +50,12 @@ async function carregarSessoesAgendadas() {
 function exibirAgendamentos(agendamentos, usuarioLogado) {
     const container = document.getElementById('horariosList');
 
-    if (!agendamentos || agendamentos.length === 0) {
+    // Filtrar agendamentos que não estão cancelados (assumindo que o status é 'CANCELADO')
+    const agendamentosValidos = agendamentos.filter(agendamento => 
+        !agendamento.status || agendamento.status.toUpperCase() !== 'CANCELADO'
+    );
+    
+    if (!agendamentosValidos || agendamentosValidos.length === 0) {
         container.innerHTML = `
             <div class="no-sessions">
                 <p>📅 Nenhuma sessão agendada no momento</p>
@@ -60,28 +65,33 @@ function exibirAgendamentos(agendamentos, usuarioLogado) {
         return;
     }
 
-    container.innerHTML = agendamentos.map(agendamento => {
-        
+    container.innerHTML = agendamentosValidos.map(agendamento => {
+    
+    // NOVO: Determinar a classe e o texto do status com base no campo 'status'
+        const statusText = agendamento.status ? agendamento.status.toUpperCase() : 'AGENDADA';
+        const statusClass = statusText === 'AGENDADA' ? 'agendada' : 
+                            statusText === 'CANCELADO' ? 'cancelada' : 'pendente'; // Ajustar conforme status do backend
+
         const rawData = agendamento.data 
-                     || agendamento.dataSessao 
-                     || agendamento.horarioData
-                     || agendamento.startDate
-                     || agendamento.date;
+                    || agendamento.dataSessao 
+                    || agendamento.horarioData
+                    || agendamento.startDate
+                    || agendamento.date;
 
         const dataFormatada = formatarDataBrasileira(rawData);
 
         // Extrai telefone e email de múltiplas fontes
         const telefone = agendamento.telefone 
-                      || agendamento.paciente?.telefone 
-                      || agendamento.usuario?.telefone 
-                      || usuarioLogado?.telefone 
-                      || '—';
+                    || agendamento.paciente?.telefone 
+                    || agendamento.usuario?.telefone 
+                    || usuarioLogado?.telefone 
+                    || '—';
 
         const email = agendamento.email 
-                   || agendamento.paciente?.usuemail
-                   || agendamento.usuario?.usuemail 
-                   || usuarioLogado?.usuemail
-                   || '—';
+                    || agendamento.paciente?.usuemail
+                    || agendamento.usuario?.usuemail 
+                    || usuarioLogado?.usuemail
+                    || '—';
 
         console.log('DEBUG - Agendamento completo:', agendamento);
         console.log('Telefone extraído:', telefone);
@@ -91,7 +101,7 @@ function exibirAgendamentos(agendamentos, usuarioLogado) {
             <div class="sessao-item">
                 <div class="sessao-header">
                     <span class="sessao-data">${dataFormatada}</span>
-                    <span class="sessao-status agendada">AGENDADA</span>
+                    <span class="sessao-status ${statusClass}">${statusText}</span>
                 </div>
 
                 <div class="sessao-details">
@@ -145,15 +155,46 @@ function formatarDataBrasileira(dataInput) {
 
     if (dataInput instanceof Date) {
         if (isNaN(dataInput)) return 'Data inválida';
+        // Ajuste: Apenas data, formatar no fuso horário local
         return dataInput.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
     }
 
     if (typeof dataInput === 'string') {
-        const parsed = new Date(dataInput);
-        if (!isNaN(parsed)) {
-            return parsed.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+        
+        // 1. Tenta tratar como ISO string completa (com horário)
+        const parsedWithTime = new Date(dataInput);
+        if (!isNaN(parsedWithTime) && dataInput.includes('T')) {
+            // Se for uma data/hora completa, usa o parse normal
+            return parsedWithTime.toLocaleDateString('pt-BR', { day: '2-digit', month: '2-digit', year: 'numeric' });
         }
+        
+        // 2. Tenta tratar como string de data pura (YYYY-MM-DD), comum em bancos
+        const datePart = dataInput.split('T')[0];
+        if (datePart) {
+            const parts = datePart.split('-');
+            if (parts.length >= 3) {
+                const [year, month, day] = parts;
+                
+                // Cria a data explicitamente no fuso horário local 
+                // para evitar que 00:00:00Z caia no dia anterior.
+                // O mês é 0-based no construtor Date()
+                const dateLocal = new Date(parseInt(year), parseInt(month) - 1, parseInt(day));
+                
+                if (!isNaN(dateLocal)) {
+                     // Verifica se o JavaScript converteu para o dia anterior devido ao fuso
+                    const diaDoMes = dateLocal.getDate().toString().padStart(2, '0');
+                    const mesDoAno = (dateLocal.getMonth() + 1).toString().padStart(2, '0');
+                    const anoCompleto = dateLocal.getFullYear();
+                    
+                    // Retorna a data no formato YYYY/MM/DD, ignorando a conversão de fuso
+                    return `${diaDoMes}/${mesDoAno}/${anoCompleto}`;
+                }
+            }
+        }
+    }
 
+    // Código original para fallback em caso de data "YYYY-MM-DD" pura
+    if (typeof dataInput === 'string') {
         const datePart = dataInput.split('T')[0];
         if (datePart) {
             const parts = datePart.split('-');
@@ -163,7 +204,7 @@ function formatarDataBrasileira(dataInput) {
             }
         }
     }
-
+    
     return 'Data inválida';
 }
 

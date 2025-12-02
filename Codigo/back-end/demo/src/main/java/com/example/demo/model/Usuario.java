@@ -27,7 +27,7 @@ public class Usuario {
     @Column(name = "USUSENHA", length = 100)
     private String ususenha;
 
-     @Column(name = "USUTELEFONE", length = 20)
+    @Column(name = "USUTELEFONE", length = 20)
     private String telefone;
 
     @Column(name = "USECPF", length = 20)

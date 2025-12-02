@@ -509,26 +509,102 @@ class ReagendamentoSystem {
     }
     
     async carregarNumeroPsicologo() {
-        try {
-            const usuarioLogado = JSON.parse(localStorage.getItem('usuarioLogado'));
-            if (!usuarioLogado || !usuarioLogado.telefone) {
-                console.warn('Número do psicólogo não encontrado');
-                return;
+        // Obter informações do usuário logado (usando a função externa que será adicionada)
+        const userInfo = obterInfoUsuarioLogado();
+        let psicologoId = userInfo && userInfo.tipo === 'PSICOLOGO' ? userInfo.id : null;
+        
+        // 1. Fallback: Se não for um psicólogo logado (i.e., é um paciente), tenta buscar o ID público do psicólogo
+        if (!psicologoId) {
+             try {
+                // Tenta buscar o primeiro usuário com usutipo = 'PSICOLOGO' (como no homePage.js)
+                const res = await fetch('/api/usuarios');
+                if (res.ok) {
+                    const list = await res.json();
+                    const psi = list.find(u => (u.usutipo && String(u.usutipo).toUpperCase() === 'PSICOLOGO'));
+                    if (psi) {
+                        psicologoId = psi.usucodigo;
+                    }
+                }
+            } catch (err) {
+                console.error('Erro ao buscar usuários para encontrar psicólogo público:', err);
             }
-            
-            // Substituir o placeholder pelo número real com link do WhatsApp
-            const telefonePlaceholder = document.getElementById('psicologo-telefone');
-            if (telefonePlaceholder) {
-                const numeroFormatado = usuarioLogado.telefone;
-                const numeroLimpo = numeroFormatado.replace(/\D/g, '');
-                const whatsappLink = `https://wa.me/55${numeroLimpo}`;
-                telefonePlaceholder.innerHTML = `<a href="${whatsappLink}" target="_blank" style="color: #73022C; text-decoration: none; font-weight: bold;">${numeroFormatado}</a>`;
-                console.log('Número do psicólogo carregado:', numeroFormatado);
+        }
+
+        if (!psicologoId) {
+            console.warn('Não foi possível identificar o ID do psicólogo. O telefone não será preenchido.');
+            return;
+        }
+
+        // 2. Busca os dados do psicólogo usando o ID encontrado
+        try {
+            const response = await fetch(`/api/psicologos/${psicologoId}`); 
+            if (response.ok) {
+                const psicologo = await response.json();
+                this.preencherTelefonePsicologo(psicologo);
+            } else {
+                console.error('Erro ao carregar dados do psicólogo para o telefone.');
             }
         } catch (error) {
-            console.error('Erro ao carregar número do psicólogo:', error);
+            console.error('Erro de conexão ao carregar dados do psicólogo:', error);
         }
     }
+
+    preencherTelefonePsicologo(psicologo) {
+        const telefonePlaceholder = document.getElementById('psicologo-telefone');
+        if (telefonePlaceholder && psicologo.telefone) { 
+            const numeroFormatado = psicologo.telefone;
+            const numeroLimpo = numeroFormatado.replace(/\D/g, '');
+            // Link para WhatsApp no formato internacional com o código 55 (Brasil)
+            const whatsappLink = `https://wa.me/55${numeroLimpo}`;
+            telefonePlaceholder.innerHTML = `<a href="${whatsappLink}" target="_blank" style="color: #73022C; text-decoration: none; font-weight: bold;">${numeroFormatado}</a>`;
+            console.log('Número do psicólogo carregado:', numeroFormatado);
+        }
+    }
+}
+
+// =======================================================
+// === FUNÇÃO DE UTILIDADE obterInfoUsuarioLogado (COPIADA DE homePage.js) ===
+// =======================================================
+
+function obterInfoUsuarioLogado() {
+    // TENTA LER A CHAVE PRINCIPAL USADA PELO FLUXO DE LOGIN/PERFIL
+    try {
+        const usuarioLogadoJson = localStorage.getItem('usuarioLogado');
+        if (usuarioLogadoJson) {
+            const usuario = JSON.parse(usuarioLogadoJson);
+            
+            // Lógica similar à de auth.js para determinar o tipo
+            let tipo = usuario.usutipo || usuario.tipoUsuario || usuario.tipo || usuario.role;
+            if (tipo) {
+                tipo = String(tipo).toUpperCase();
+            } else if (usuario.crp || usuario.especialidade) {
+                tipo = 'PSICOLOGO';
+            } else {
+                tipo = 'PACIENTE'; // Padrão se não houver tipo explícito
+            }
+            
+            const id = usuario.usucodigo || usuario.id || usuario.idUsuario;
+            
+            if (id && tipo) {
+                return { id: parseInt(id), tipo: tipo };
+            }
+        }
+    } catch (err) {
+        console.warn('Erro ao parsear localStorage.usuarioLogado:', err);
+    }
+
+    // Fallback para chaves mais antigas ou chaves individuais
+    const id = sessionStorage.getItem('usuarioId') || localStorage.getItem('usuarioId');
+    const tipo = sessionStorage.getItem('usuarioTipo') || localStorage.getItem('usuarioTipo'); 
+
+    if (id && tipo) {
+        return {
+            id: parseInt(id),
+            tipo: String(tipo).toUpperCase()
+        };
+    }
+
+    return null;
 }
 
 // Variável global para acessar de onclick
