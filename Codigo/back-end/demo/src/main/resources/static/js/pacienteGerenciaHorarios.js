@@ -24,7 +24,7 @@ async function carregarSessoesAgendadas() {
 
         console.log('Buscando agendamentos para usuário:', pacienteId);
 
-        const response = await fetch(`http://localhost:8080/agendamentos/usuario/${pacienteId}`, {
+        const response = await fetch(`historical-pepi-puc-tis-d0d4bf2c.koyeb.app/agendamentos/usuario/${pacienteId}`, {
             method: 'GET',
             headers: {
                 'Content-Type': 'application/json'
@@ -216,7 +216,7 @@ async function cancelarAgendamento(id) {
     const usuario = JSON.parse(localStorage.getItem('usuarioLogado'));
 
     try {
-        const response = await fetch(`http://localhost:8080/agendamentos/${id}`, {
+        const response = await fetch(`historical-pepi-puc-tis-d0d4bf2c.koyeb.app/agendamentos/${id}`, {
             method: 'DELETE',
             headers: {
                 "Content-Type": "application/json",

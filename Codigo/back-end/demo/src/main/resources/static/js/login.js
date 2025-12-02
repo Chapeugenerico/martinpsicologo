@@ -51,7 +51,7 @@ if (loginForm) {
     console.log('Iniciando login para:', email);
 
     // Fazer requisição para API de login
-    fetch('http://localhost:8080/api/usuarios/login', {
+    fetch('historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/usuarios/login', {
         method: 'POST',
         headers: {
             'Content-Type': 'application/json'

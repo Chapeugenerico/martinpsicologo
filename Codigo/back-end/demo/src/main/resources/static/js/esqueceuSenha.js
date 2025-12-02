@@ -18,7 +18,7 @@ async function resetPassword() {
   try {
     mostrarMensagem('Verificando email...', 'info');
 
-    const response = await fetch('http://localhost:8080/api/usuarios/esqueceu-senha', {
+    const response = await fetch('historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/usuarios/esqueceu-senha', {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
       body: JSON.stringify({ email })
@@ -42,7 +42,7 @@ async function resetPassword() {
 
 async function solicitarToken(email) {
   try {
-    const response = await fetch(`http://localhost:8080/api/usuarios/solicitar?userEmail=${encodeURIComponent(email)}`, {
+    const response = await fetch(`historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/usuarios/solicitar?userEmail=${encodeURIComponent(email)}`, {
       method: 'POST'
     });
 
@@ -73,7 +73,7 @@ async function validarToken() {
   }
 
   try {
-    const response = await fetch(`http://localhost:8080/api/usuarios/validar?userEmail=${encodeURIComponent(email)}&token=${encodeURIComponent(token)}`, {
+    const response = await fetch(`historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/usuarios/validar?userEmail=${encodeURIComponent(email)}&token=${encodeURIComponent(token)}`, {
       method: 'POST'
     });
 

@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="css/esqueceuSenha.css">
+    <link rel="stylesheet" href="/css/esqueceuSenha.css">
     <link href="https://fonts.googleapis.com/css?family=Istok+Web&display=swap" rel="stylesheet">
     <title>Nova Senha</title>
 </head>
@@ -143,7 +143,7 @@
             console.log('Email:', emailRecuperacao);
             console.log('Nova senha:', novaSenha);
             
-            const response = await fetch('http://localhost:8080/api/usuarios/redefinir-senha', {
+            const response = await fetch('historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/usuarios/redefinir-senha', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json'
