@@ -189,7 +189,7 @@ class AppointmentSystem {
             const ano = this.currentDate.getFullYear();
             const dataConsulta = `${ano}-${String(mes).padStart(2, '0')}-01`;
             
-            const response = await fetch(`historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/horarios/disponiveis?data=${dataConsulta}`);
+            const response = await fetch(`https://historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/horarios/disponiveis?data=${dataConsulta}`);
             
             if (response.ok) {
                 this.horariosDisponiveis = await response.json();
@@ -523,7 +523,7 @@ class AppointmentSystem {
 
             console.log('Dados enviados:', agendamentoData);
             
-            const response = await fetch('historical-pepi-puc-tis-d0d4bf2c.koyeb.app/agendamentos', {
+            const response = await fetch('https://historical-pepi-puc-tis-d0d4bf2c.koyeb.app/agendamentos', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -581,7 +581,7 @@ if (response.ok) {
         const antigo = JSON.parse(reagendamentoJSON);
         try {
             // Deletar agendamento antigo
-            const deleteResponse = await fetch(`historical-pepi-puc-tis-d0d4bf2c.koyeb.app/agendamentos/${antigo.agendamentoID}`, {
+            const deleteResponse = await fetch(`https://historical-pepi-puc-tis-d0d4bf2c.koyeb.app/agendamentos/${antigo.agendamentoID}`, {
                 method: 'DELETE'
             });
             if (!deleteResponse.ok) {

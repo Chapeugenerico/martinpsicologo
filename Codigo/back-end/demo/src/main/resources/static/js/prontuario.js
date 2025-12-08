@@ -1,5 +1,5 @@
 // prontuario.js - Funcionalidades da página de prontuário
-const API_BASE_URL = 'historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api';
+const API_BASE_URL = 'https://historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api';
 
 // Função para salvar prontuário
 async function salvarProntuario(dadosProntuario) {

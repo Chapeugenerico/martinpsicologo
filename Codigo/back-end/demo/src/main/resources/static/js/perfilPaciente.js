@@ -166,7 +166,7 @@ class PerfilPaciente {
         console.log('Nome:', this.paciente.usunome);
 
         try {
-            const response = await fetch(`historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/usuarios/${usuarioId}`, {
+            const response = await fetch(`https://historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/usuarios/${usuarioId}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json'
@@ -278,7 +278,7 @@ class PerfilPaciente {
         console.log('Dados:', dadosAtualizados);
 
         try {
-            const response = await fetch(`historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/usuarios/${usuarioId}`, {
+            const response = await fetch(`https://historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/usuarios/${usuarioId}`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',

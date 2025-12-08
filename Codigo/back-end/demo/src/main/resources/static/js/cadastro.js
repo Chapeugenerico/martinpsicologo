@@ -23,7 +23,7 @@ document.querySelector('form').addEventListener('submit', function(e) {
 
   console.log('Enviando dados:', usuarioData);
 
-  fetch('historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/usuarios', {
+  fetch('https://historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/usuarios', {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'

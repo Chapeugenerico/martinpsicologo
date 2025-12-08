@@ -123,7 +123,7 @@ async function salvarNovaDespesa() {
     ];
 
     try {
-        const response = await fetch('historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/despesas/salvar-mes', {
+        const response = await fetch('https://historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/despesas/salvar-mes', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -200,7 +200,7 @@ async function salvarDespesas() {
             }
         ];
 
-        const response = await fetch('historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/despesas/salvar-mes', {
+        const response = await fetch('https://historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/despesas/salvar-mes', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'
@@ -286,7 +286,7 @@ function formatarTempo(minutos) {
 
 async function deletarDespesasExistentes(mes, ano) {
     try {
-        const response = await fetch(`historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/despesas?mes=${mes}&ano=${ano}`, {
+        const response = await fetch(`https://historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/despesas?mes=${mes}&ano=${ano}`, {
             method: 'DELETE'
         });
         if (!response.ok) {
@@ -301,7 +301,7 @@ async function deletarDespesasExistentes(mes, ano) {
 // Função para carregar despesas do mês
 async function carregarDespesas(mes, ano) {
     try {
-        const response = await fetch(`historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/despesas/filtro?mes=${mes}&ano=${ano}`);if (response.ok) {
+        const response = await fetch(`https://historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/despesas/filtro?mes=${mes}&ano=${ano}`);if (response.ok) {
             const despesas = await response.json();
             // Limpar campos
             document.getElementById('energia').value = 'R$ 0,00';
@@ -647,7 +647,7 @@ async function salvarDespesasEdicao() {
             }
         ];
 
-        const response = await fetch('historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/despesas/salvar-mes', {
+        const response = await fetch('https://historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/despesas/salvar-mes', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json'

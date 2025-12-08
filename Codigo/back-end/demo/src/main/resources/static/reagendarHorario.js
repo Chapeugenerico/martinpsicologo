@@ -95,7 +95,7 @@ class ReagendamentoSystem {
             const ano = this.currentDate.getFullYear();
             const dataConsulta = `${ano}-${String(mes).padStart(2, '0')}-01`;
             
-            const response = await fetch(`historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/horarios/disponiveis?data=${dataConsulta}`);
+            const response = await fetch(`https://historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/horarios/disponiveis?data=${dataConsulta}`);
             
             if (response.ok) {
                 this.horariosDisponiveis = await response.json();
@@ -352,7 +352,7 @@ class ReagendamentoSystem {
             
             console.log('Criando novo agendamento:', novoAgendamento);
             
-            const responseNovo = await fetch('historical-pepi-puc-tis-d0d4bf2c.koyeb.app/agendamentos', {
+            const responseNovo = await fetch('https://historical-pepi-puc-tis-d0d4bf2c.koyeb.app/agendamentos', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(novoAgendamento)
@@ -449,7 +449,7 @@ class ReagendamentoSystem {
             console.log('Deletando agendamento original com ID:', this.agendamentoOriginal.agendamentoID);
             console.log('usuCodigo:', usuario?.usucodigo);
             
-            const response = await fetch(`historical-pepi-puc-tis-d0d4bf2c.koyeb.app/agendamentos/${this.agendamentoOriginal.agendamentoID}`, {
+            const response = await fetch(`https://historical-pepi-puc-tis-d0d4bf2c.koyeb.app/agendamentos/${this.agendamentoOriginal.agendamentoID}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',
@@ -482,7 +482,7 @@ class ReagendamentoSystem {
             
             console.log('Deletando novo agendamento com ID:', this.novoAgendamentoID);
             
-            const response = await fetch(`historical-pepi-puc-tis-d0d4bf2c.koyeb.app/agendamentos/${this.novoAgendamentoID}`, {
+            const response = await fetch(`https://historical-pepi-puc-tis-d0d4bf2c.koyeb.app/agendamentos/${this.novoAgendamentoID}`, {
                 method: 'DELETE',
                 headers: {
                     'Content-Type': 'application/json',

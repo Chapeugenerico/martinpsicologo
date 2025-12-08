@@ -1,7 +1,7 @@
 // gerenciarPaciente.js - popula a tabela de pacientes
 
 let pacientes = [];
-const API_BASE_URL = 'historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api';
+const API_BASE_URL = 'https://historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api';
 let pacienteSelecionadoId = null; // VARIÁVEL QUE ESTAVA FALTANDO
 
 async function carregarPacientes() {
@@ -638,7 +638,7 @@ async function abrirAnamneseCrianca() {
             throw new Error('Paciente não encontrado');
         }
 
-        const url = `historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/prontuarios/paciente/${pacienteSelecionadoId}?tipoPaciente=crianca`;
+        const url = `https://historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/prontuarios/paciente/${pacienteSelecionadoId}?tipoPaciente=crianca`;
         console.log('URL da requisição:', url);
 
         // Cria o prontuário no backend
@@ -697,7 +697,7 @@ async function abrirAnamneseAdulto() {
             throw new Error('Paciente não encontrado');
         }
 
-        const url = `historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/prontuarios/paciente/${pacienteSelecionadoId}?tipoPaciente=adulto`;
+        const url = `https://historical-pepi-puc-tis-d0d4bf2c.koyeb.app/api/prontuarios/paciente/${pacienteSelecionadoId}?tipoPaciente=adulto`;
         console.log('URL da requisição:', url);
 
         const response = await fetch(url, {
